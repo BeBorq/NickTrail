@@ -26,4 +26,4 @@ class StructuredTests(unittest.TestCase):
   report=benchmark();self.assertEqual(report['cases'],40);self.assertEqual(report['hit_at_1'],1)
   with patch('nicktrail.ranking.analyze',return_value={}):before=benchmark()
   self.assertGreater(report['mrr'],before['mrr']);self.assertGreater(report['hit_at_1'],before['hit_at_1'])
-  self.assertEqual(report['recall_at_5'],1);self.assertEqual(report['precision_at_5'],.2)
+  self.assertEqual(report['recall_at_5'],1);self.assertAlmostEqual(report['precision_at_5'],.2)
