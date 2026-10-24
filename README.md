@@ -8,8 +8,10 @@ evidence that connects them, so you can decide which accounts are yours and whic
 
 ![NickTrail panel with fictional data](docs/images/account-groups.png)
 
-Everything runs on your computer. The database is a single SQLite file, nothing is uploaded, and there is no
-account, telemetry or cloud service.
+Everything runs on your computer. Your results live in a single SQLite file that never leaves your machine, and
+there is no account, telemetry or cloud service. A search only sends the nicknames you enter to the public sites and
+APIs being checked; email addresses are never used as search terms, and imported mail or password files are
+processed locally.
 
 > **Finding an account, finding a link between accounts and knowing who owns an account are three different
 > things.** NickTrail never decides ownership for you: a matching nickname, photo or name is a lead, not proof.
@@ -23,7 +25,7 @@ account, telemetry or cloud service.
 - **Reads your confirmed accounts first** and follows only public links (bios, “website” fields, `rel=me`,
   Linktree-style pages) to build an evidence graph and suggested account groups.
 - **Finds forgotten accounts in your own data**: imports a mailbox export (`.mbox` from Google Takeout,
-  `.eml`, `.zip`) — headers only — and password-manager CSV exports — website and login only, never passwords.
+  `.eml`, `.zip`) — headers only — and password-manager CSV exports — only the website and login of each entry are kept; passwords are never stored.
 - **Internet Archive search** for profile addresses that contain a number or tag
   (e.g. `example.com/user/123456-nick`).
 - **Optional keyed sources** you add yourself: Brave Search, Have I Been Pwned (your own email), Steam, Twitch,

@@ -116,7 +116,7 @@ accounts share (a team website, a public company email) are recognized and skipp
 `accounthints.py` streams an `.mbox`, `.eml` folder or `.zip` and reads only headers. It groups mail by
 the sending service's domain (so `noreply@mail.accounts.example.com` counts as `example.com`),
 ignores mail from people and from webmail providers, and recognizes sign-up, confirmation, password-reset, sign-in and deletion
-messages in several languages. From a password CSV only the URL and username columns are read.
+messages in several languages. A password CSV is parsed locally row by row; only the URL and username cells are kept.
 Subjects, bodies and passwords are never stored.
 
 ## Local web panel security

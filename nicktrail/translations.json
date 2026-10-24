@@ -827,7 +827,6 @@
    "Twoje konta i wpisy": "Your accounts and entries",
    "Twoje konta i wpisy (": "Your accounts and entries (",
    "Znajdź zapomniane konta w swojej poczcie i zapisanych hasłach": "Find forgotten accounts in your mailbox and saved passwords",
-   "Najskuteczniejszy sposób na stare konta: prawie każda rejestracja zostawia maila („Witamy”, „Potwierdź konto”, „Reset hasła”) albo zapisane hasło. Wszystko dzieje się na Twoim komputerze i nic nie jest wysyłane. Z poczty czytane są tylko nagłówki (nadawca, temat, data); treść jest pomijana, a tematy nie są zapisywane. Z eksportu haseł brany jest tylko adres strony i login; hasła nie są czytane ani zapisywane.": "The most effective way to find old accounts: almost every sign-up leaves an email (“Welcome”, “Confirm your account”, “Password reset”) or a saved password. Everything happens on your computer and nothing is sent anywhere. Only mail headers are read (sender, subject, date); message bodies are skipped and subjects are not stored. From a password export only the website and the login are used; passwords are neither read nor stored.",
    "Plik poczty: .mbox (np. z Google Takeout), folder z plikami .eml albo .zip": "Mail file: .mbox (e.g. from Google Takeout), a folder of .eml files or a .zip",
    "C:\\Users\\...\\Takeout\\Mail\\poczta.mbox": "C:\\Users\\...\\Takeout\\Mail\\mail.mbox",
    "Przeszukaj pocztę": "Scan mailbox",
@@ -899,7 +898,8 @@
    "Nic nie jest wysyłane do żadnego AI. Pakiet możesz obejrzeć i samodzielnie skopiować; to Ty decydujesz o przekazaniu danych.": "Nothing is sent to any AI. You can review the package and copy it yourself; you decide whether to share the data.",
    "Więcej narzędzi": "More tools",
    "Rzadziej potrzebne funkcje: klucze API, kontrole ręczne, archiwum, wycieki, import danych i narzędzia do utrzymania źródeł.": "Less frequent tasks: API keys, manual checks, archive, breach check, data import and source maintenance.",
-   "Ponowny odczyt zatwierdzonych adresów": "Re-read confirmed addresses"
+   "Ponowny odczyt zatwierdzonych adresów": "Re-read confirmed addresses",
+   "Najskuteczniejszy sposób na stare konta: prawie każda rejestracja zostawia maila („Witamy”, „Potwierdź konto”, „Reset hasła”) albo zapisane hasło. Wszystko dzieje się na Twoim komputerze i nic nie jest wysyłane. Z poczty czytane są tylko nagłówki (nadawca, temat, data); treść jest pomijana, a tematy nie są zapisywane. Z eksportu haseł zostaje tylko adres strony i login; hasła nie są zapisywane, pokazywane ani nigdzie wysyłane.": "The most effective way to find old accounts: almost every sign-up leaves an email (“Welcome”, “Confirm your account”, “Password reset”) or a saved password. Everything happens on your computer and nothing is sent anywhere. Only mail headers are read (sender, subject, date); message bodies are skipped and subjects are not stored. From a password export only the website and the login are kept; passwords are never stored, shown or sent anywhere."
   }
  },
  "literals": {

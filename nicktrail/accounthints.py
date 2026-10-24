@@ -10,9 +10,9 @@ from files the user points to on their own computer:
     signal kinds (welcome/verify/reset/login/deletion) and sender names.  Subjects
     are used for classification and then discarded.
   * password export (CSV from Chrome, Edge, Firefox, Bitwarden, 1Password,
-    KeePass, LastPass, Proton Pass, Dashlane...): only the website and username
-    columns are used.  The password column is never read into the result, never
-    stored and never shown.
+    KeePass, LastPass, Proton Pass, Dashlane...): each row is parsed locally and
+    only the website and username cells are kept.  The password column is never
+    copied into the result, never stored and never shown.
 
 Nothing is sent anywhere.  A domain is a hint that an account may exist; the
 user decides ("I have an account here", "deleted", "not an account").
@@ -234,7 +234,7 @@ def _column(fields, names):
 
 
 def scan_passwords(text):
-    """Website + username pairs from a password-manager CSV.  Passwords are never read."""
+    """Website + username pairs from a password-manager CSV.  Passwords are never kept."""
     if not isinstance(text, str) or not text.strip():
         raise ValueError('Pusty plik eksportu haseł')
     if len(text) > MAX_CSV_BYTES:

@@ -67,8 +67,9 @@ passwords**:
 - **Mailbox**: give the path to an `.mbox` file (for example from Google Takeout), a folder of `.eml`
   files or a `.zip`. Only headers are read (sender, subject, date). Message bodies are skipped and
   subjects are not stored. Personal mail is ignored; only mail from services counts.
-- **Password export**: choose the CSV file your browser or password manager exports. Only the
-  website and login columns are read. Passwords are never read or stored. Delete the CSV afterwards:
+- **Password export**: choose the CSV file your browser or password manager exports. The file is
+  parsed on your computer and only the website and login of each entry are kept; passwords are never
+  stored, shown or sent anywhere. Delete the CSV afterwards:
   it is an unencrypted file.
 
 Each service appears as a card with what was seen and when. Mark it **I have an account here**,
