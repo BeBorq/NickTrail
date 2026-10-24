@@ -1,0 +1,4005 @@
+{
+  "schema_version": 1,
+  "services": [
+    {
+      "id": "HackerOne",
+      "name": "HackerOne",
+      "domain": "hackerone.com",
+      "profile_url": "https://hackerone.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "hackerone_json_or_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": "https://hackerone.com/{nick}",
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "profile_observed",
+        "last_live_check": "2026-10-21",
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Bugcrowd",
+      "name": "Bugcrowd",
+      "domain": "bugcrowd.com",
+      "profile_url": "https://bugcrowd.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Keybase",
+      "name": "Keybase",
+      "domain": "keybase.io",
+      "profile_url": "https://keybase.io/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_found_observed",
+        "last_live_check": "2026-10-21",
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Replit",
+      "name": "Replit",
+      "domain": "replit.com",
+      "profile_url": "https://replit.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "CodePen",
+      "name": "CodePen",
+      "domain": "codepen.io",
+      "profile_url": "https://codepen.io/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Kaggle",
+      "name": "Kaggle",
+      "domain": "www.kaggle.com",
+      "profile_url": "https://www.kaggle.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "HuggingFace",
+      "name": "HuggingFace",
+      "domain": "huggingface.co",
+      "profile_url": "https://huggingface.co/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "npm",
+      "name": "npm",
+      "domain": "www.npmjs.com",
+      "profile_url": "https://www.npmjs.com/~{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "PyPI",
+      "name": "PyPI",
+      "domain": "pypi.org",
+      "profile_url": "https://pypi.org/user/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "RubyGems",
+      "name": "RubyGems",
+      "domain": "rubygems.org",
+      "profile_url": "https://rubygems.org/profiles/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "DockerHub",
+      "name": "DockerHub",
+      "domain": "hub.docker.com",
+      "profile_url": "https://hub.docker.com/u/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "SourceForge",
+      "name": "SourceForge",
+      "domain": "sourceforge.net",
+      "profile_url": "https://sourceforge.net/u/{nick}/profile/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "LeetCode",
+      "name": "LeetCode",
+      "domain": "leetcode.com",
+      "profile_url": "https://leetcode.com/u/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Codewars",
+      "name": "Codewars",
+      "domain": "www.codewars.com",
+      "profile_url": "https://www.codewars.com/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Chess.com",
+      "name": "Chess.com",
+      "domain": "www.chess.com",
+      "profile_url": "https://www.chess.com/member/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Lichess",
+      "name": "Lichess",
+      "domain": "lichess.org",
+      "profile_url": "https://lichess.org/@/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Last.fm",
+      "name": "Last.fm",
+      "domain": "www.last.fm",
+      "profile_url": "https://www.last.fm/user/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "music",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "SoundCloud",
+      "name": "SoundCloud",
+      "domain": "soundcloud.com",
+      "profile_url": "https://soundcloud.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "music",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Bandcamp",
+      "name": "Bandcamp",
+      "domain": "bandcamp.com",
+      "profile_url": "https://bandcamp.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "music",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Mixcloud",
+      "name": "Mixcloud",
+      "domain": "www.mixcloud.com",
+      "profile_url": "https://www.mixcloud.com/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "music",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Vimeo",
+      "name": "Vimeo",
+      "domain": "vimeo.com",
+      "profile_url": "https://vimeo.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "video",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Behance",
+      "name": "Behance",
+      "domain": "www.behance.net",
+      "profile_url": "https://www.behance.net/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Dribbble",
+      "name": "Dribbble",
+      "domain": "dribbble.com",
+      "profile_url": "https://dribbble.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "ArtStation",
+      "name": "ArtStation",
+      "domain": "www.artstation.com",
+      "profile_url": "https://www.artstation.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "DeviantArt",
+      "name": "DeviantArt",
+      "domain": "www.deviantart.com",
+      "profile_url": "https://www.deviantart.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Flickr",
+      "name": "Flickr",
+      "domain": "www.flickr.com",
+      "profile_url": "https://www.flickr.com/people/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "photography",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Medium",
+      "name": "Medium",
+      "domain": "medium.com",
+      "profile_url": "https://medium.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Hashnode",
+      "name": "Hashnode",
+      "domain": "hashnode.com",
+      "profile_url": "https://hashnode.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Linktree",
+      "name": "Linktree",
+      "domain": "linktr.ee",
+      "profile_url": "https://linktr.ee/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "links",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Ko-fi",
+      "name": "Ko-fi",
+      "domain": "ko-fi.com",
+      "profile_url": "https://ko-fi.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "BuyMeACoffee",
+      "name": "BuyMeACoffee",
+      "domain": "buymeacoffee.com",
+      "profile_url": "https://buymeacoffee.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Patreon",
+      "name": "Patreon",
+      "domain": "www.patreon.com",
+      "profile_url": "https://www.patreon.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "itch.io",
+      "name": "itch.io",
+      "domain": "itch.io",
+      "profile_url": "https://{nick}.itch.io",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "uncertain_observed",
+        "last_live_check": "2026-10-21",
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Letterboxd",
+      "name": "Letterboxd",
+      "domain": "letterboxd.com",
+      "profile_url": "https://letterboxd.com/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "ProductHunt",
+      "name": "ProductHunt",
+      "domain": "www.producthunt.com",
+      "profile_url": "https://www.producthunt.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Unsplash",
+      "name": "Unsplash",
+      "domain": "unsplash.com",
+      "profile_url": "https://unsplash.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "photography",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "500px",
+      "name": "500px",
+      "domain": "500px.com",
+      "profile_url": "https://500px.com/p/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "photography",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Instructables",
+      "name": "Instructables",
+      "domain": "www.instructables.com",
+      "profile_url": "https://www.instructables.com/member/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Hackaday",
+      "name": "Hackaday",
+      "domain": "hackaday.io",
+      "profile_url": "https://hackaday.io/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "SpaceHey",
+      "name": "SpaceHey",
+      "domain": "spacehey.com",
+      "profile_url": "https://spacehey.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "GitLabFreedesktop",
+      "name": "GitLabFreedesktop",
+      "domain": "gitlab.freedesktop.org",
+      "profile_url": "https://gitlab.freedesktop.org/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "GitLabGNOME",
+      "name": "GitLabGNOME",
+      "domain": "gitlab.gnome.org",
+      "profile_url": "https://gitlab.gnome.org/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "GitLabKDE",
+      "name": "GitLabKDE",
+      "domain": "invent.kde.org",
+      "profile_url": "https://invent.kde.org/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Bitbucket",
+      "name": "Bitbucket",
+      "domain": "bitbucket.org",
+      "profile_url": "https://bitbucket.org/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Launchpad",
+      "name": "Launchpad",
+      "domain": "launchpad.net",
+      "profile_url": "https://launchpad.net/~{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "SourceHut",
+      "name": "SourceHut",
+      "domain": "sr.ht",
+      "profile_url": "https://sr.ht/~{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "OpenHub",
+      "name": "OpenHub",
+      "domain": "www.openhub.net",
+      "profile_url": "https://www.openhub.net/accounts/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Libraries.io",
+      "name": "Libraries.io",
+      "domain": "libraries.io",
+      "profile_url": "https://libraries.io/github/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Packagist",
+      "name": "Packagist",
+      "domain": "packagist.org",
+      "profile_url": "https://packagist.org/users/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "NuGet",
+      "name": "NuGet",
+      "domain": "www.nuget.org",
+      "profile_url": "https://www.nuget.org/profiles/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Crates.io",
+      "name": "Crates.io",
+      "domain": "crates.io",
+      "profile_url": "https://crates.io/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Hex.pm",
+      "name": "Hex.pm",
+      "domain": "hex.pm",
+      "profile_url": "https://hex.pm/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "CPAN",
+      "name": "CPAN",
+      "domain": "metacpan.org",
+      "profile_url": "https://metacpan.org/author/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "OpenCollective",
+      "name": "OpenCollective",
+      "domain": "opencollective.com",
+      "profile_url": "https://opencollective.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Liberapay",
+      "name": "Liberapay",
+      "domain": "liberapay.com",
+      "profile_url": "https://liberapay.com/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Gumroad",
+      "name": "Gumroad",
+      "domain": "gumroad.com",
+      "profile_url": "https://gumroad.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "funding",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Intigriti",
+      "name": "Intigriti",
+      "domain": "app.intigriti.com",
+      "profile_url": "https://app.intigriti.com/profile/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "YesWeHack",
+      "name": "YesWeHack",
+      "domain": "yeswehack.com",
+      "profile_url": "https://yeswehack.com/hunters/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "RootMe",
+      "name": "RootMe",
+      "domain": "www.root-me.org",
+      "profile_url": "https://www.root-me.org/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "TryHackMe",
+      "name": "TryHackMe",
+      "domain": "tryhackme.com",
+      "profile_url": "https://tryhackme.com/p/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "security",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "HackerRank",
+      "name": "HackerRank",
+      "domain": "www.hackerrank.com",
+      "profile_url": "https://www.hackerrank.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Codeforces",
+      "name": "Codeforces",
+      "domain": "codeforces.com",
+      "profile_url": "https://codeforces.com/profile/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "AtCoder",
+      "name": "AtCoder",
+      "domain": "atcoder.jp",
+      "profile_url": "https://atcoder.jp/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Topcoder",
+      "name": "Topcoder",
+      "domain": "www.topcoder.com",
+      "profile_url": "https://www.topcoder.com/members/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Exercism",
+      "name": "Exercism",
+      "domain": "exercism.org",
+      "profile_url": "https://exercism.org/profiles/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "freeCodeCamp",
+      "name": "freeCodeCamp",
+      "domain": "www.freecodecamp.org",
+      "profile_url": "https://www.freecodecamp.org/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Scratch",
+      "name": "Scratch",
+      "domain": "scratch.mit.edu",
+      "profile_url": "https://scratch.mit.edu/users/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Observable",
+      "name": "Observable",
+      "domain": "observablehq.com",
+      "profile_url": "https://observablehq.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "JSFiddle",
+      "name": "JSFiddle",
+      "domain": "jsfiddle.net",
+      "profile_url": "https://jsfiddle.net/user/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "StackBlitz",
+      "name": "StackBlitz",
+      "domain": "stackblitz.com",
+      "profile_url": "https://stackblitz.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "CodeSandbox",
+      "name": "CodeSandbox",
+      "domain": "codesandbox.io",
+      "profile_url": "https://codesandbox.io/u/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "GeeksForGeeks",
+      "name": "GeeksForGeeks",
+      "domain": "www.geeksforgeeks.org",
+      "profile_url": "https://www.geeksforgeeks.org/user/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "developer",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Geocaching",
+      "name": "Geocaching",
+      "domain": "www.geocaching.com",
+      "profile_url": "https://www.geocaching.com/p/default.aspx?u={nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Komoot",
+      "name": "Komoot",
+      "domain": "www.komoot.com",
+      "profile_url": "https://www.komoot.com/user/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Untappd",
+      "name": "Untappd",
+      "domain": "untappd.com",
+      "profile_url": "https://untappd.com/user/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "community",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Speedrun",
+      "name": "Speedrun",
+      "domain": "www.speedrun.com",
+      "profile_url": "https://www.speedrun.com/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "osu",
+      "name": "osu",
+      "domain": "osu.ppy.sh",
+      "profile_url": "https://osu.ppy.sh/users/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "NameMC",
+      "name": "NameMC",
+      "domain": "namemc.com",
+      "profile_url": "https://namemc.com/profile/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "PlanetMinecraft",
+      "name": "PlanetMinecraft",
+      "domain": "www.planetminecraft.com",
+      "profile_url": "https://www.planetminecraft.com/member/{nick}/",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Modrinth",
+      "name": "Modrinth",
+      "domain": "modrinth.com",
+      "profile_url": "https://modrinth.com/user/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "GameJolt",
+      "name": "GameJolt",
+      "domain": "gamejolt.com",
+      "profile_url": "https://gamejolt.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Newgrounds",
+      "name": "Newgrounds",
+      "domain": "newgrounds.com",
+      "profile_url": "https://{nick}.newgrounds.com",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Kongregate",
+      "name": "Kongregate",
+      "domain": "www.kongregate.com",
+      "profile_url": "https://www.kongregate.com/accounts/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "ModDB",
+      "name": "ModDB",
+      "domain": "www.moddb.com",
+      "profile_url": "https://www.moddb.com/members/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "NexusMods",
+      "name": "NexusMods",
+      "domain": "next.nexusmods.com",
+      "profile_url": "https://next.nexusmods.com/profile/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "gaming",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Neocities",
+      "name": "Neocities",
+      "domain": "neocities.org",
+      "profile_url": "https://neocities.org/site/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Dreamwidth",
+      "name": "Dreamwidth",
+      "domain": "dreamwidth.org",
+      "profile_url": "https://{nick}.dreamwidth.org",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "LiveJournal",
+      "name": "LiveJournal",
+      "domain": "livejournal.com",
+      "profile_url": "https://{nick}.livejournal.com",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Tumblr",
+      "name": "Tumblr",
+      "domain": "tumblr.com",
+      "profile_url": "https://{nick}.tumblr.com",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "WordPress",
+      "name": "WordPress",
+      "domain": "wordpress.com",
+      "profile_url": "https://{nick}.wordpress.com",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9-]{0,61}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Substack",
+      "name": "Substack",
+      "domain": "substack.com",
+      "profile_url": "https://substack.com/@{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Wattpad",
+      "name": "Wattpad",
+      "domain": "www.wattpad.com",
+      "profile_url": "https://www.wattpad.com/user/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "ArchiveOfOurOwn",
+      "name": "ArchiveOfOurOwn",
+      "domain": "archiveofourown.org",
+      "profile_url": "https://archiveofourown.org/users/{nick}/profile",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Quotev",
+      "name": "Quotev",
+      "domain": "www.quotev.com",
+      "profile_url": "https://www.quotev.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Tapas",
+      "name": "Tapas",
+      "domain": "tapas.io",
+      "profile_url": "https://tapas.io/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "blogging",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Sketchfab",
+      "name": "Sketchfab",
+      "domain": "sketchfab.com",
+      "profile_url": "https://sketchfab.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "Cara",
+      "name": "Cara",
+      "domain": "cara.app",
+      "profile_url": "https://cara.app/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "creative",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "SpeakerDeck",
+      "name": "SpeakerDeck",
+      "domain": "speakerdeck.com",
+      "profile_url": "https://speakerdeck.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "professional",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "AllMyLinks",
+      "name": "AllMyLinks",
+      "domain": "allmylinks.com",
+      "profile_url": "https://allmylinks.com/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "links",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    },
+    {
+      "id": "BioLink",
+      "name": "BioLink",
+      "domain": "bio.link",
+      "profile_url": "https://bio.link/{nick}",
+      "username_pattern": "[A-Za-z0-9][A-Za-z0-9_.-]{0,62}",
+      "category": "links",
+      "detection": {
+        "strategy": "explicit_profile_metadata",
+        "not_found_titles": [
+          "page not found",
+          "user not found",
+          "profile not found",
+          "404 not found",
+          "account suspended"
+        ],
+        "redirect_policy": "same_normalized_url",
+        "javascript_required": null
+      },
+      "public_metadata": [
+        "Person",
+        "sameAs",
+        "canonical",
+        "og:url",
+        "og:type",
+        "og:image",
+        "description"
+      ],
+      "public_api": null,
+      "rate_limits": {
+        "known_policy": "unknown",
+        "respect_provider_blocks": true
+      },
+      "validation": {
+        "strategy_tests": "shared_offline_fixtures",
+        "live_status": "not_tested",
+        "last_live_check": null,
+        "coverage_claim": "template_only_until_profile_evidence"
+      }
+    }
+  ]
+}
