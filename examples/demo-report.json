@@ -1,0 +1,269 @@
+{
+  "project": [
+    {
+      "id": 1,
+      "name": "DEMO — fictional data only"
+    }
+  ],
+  "nodes": [
+    {
+      "id": 1,
+      "project": 1,
+      "url": "https://github.com/fictional-nicktrail",
+      "platform": "GitHub",
+      "kind": "profile",
+      "ownership": "mine",
+      "seed": 1,
+      "depth": 0,
+      "state": "found",
+      "data": "{\"alias\": \"fictional-nicktrail\", \"avatar_url\": null, \"bio\": \"I recommend https://github.com/another-fictional/demo\", \"declared_location\": null, \"display\": \"Fictional Person\", \"evidence_digest\": \"aa7ac9950df88983fbfdaaebe63672a864aec744f1dd8d19a2931508e0eb7380\", \"stable_id\": \"900000001\"}",
+      "created": "2026-10-24T16:12:30.716596+00:00",
+      "user_added": 0
+    },
+    {
+      "id": 2,
+      "project": 1,
+      "url": "https://nicktrail.example/about",
+      "platform": "Strona",
+      "kind": "page",
+      "ownership": "mine",
+      "seed": 1,
+      "depth": 0,
+      "state": "found",
+      "data": "{\"evidence_digest\": \"f40e596ed1076ed38626d72a1254ecef7f0ddd3bdeaf19d7720af0a9236d109a\", \"title\": \"My GitHub is https://github.com/fictional-nicktrail\\nContact: support@nicktrail.example\"}",
+      "created": "2026-10-24T16:12:30.718421+00:00",
+      "user_added": 0
+    },
+    {
+      "id": 3,
+      "project": 1,
+      "url": "https://github.com/another-fictional/demo",
+      "platform": "GitHub",
+      "kind": "project",
+      "ownership": "unknown",
+      "seed": 0,
+      "depth": 1,
+      "state": "unverified",
+      "data": "{}",
+      "created": "2026-10-24T16:12:30.735032+00:00",
+      "user_added": 0
+    },
+    {
+      "id": 4,
+      "project": 1,
+      "url": "support@nicktrail.example",
+      "platform": "Deklaracja",
+      "kind": "email",
+      "ownership": "unknown",
+      "seed": 0,
+      "depth": 1,
+      "state": "unverified",
+      "data": "{}",
+      "created": "2026-10-24T16:12:30.754941+00:00",
+      "user_added": 0
+    }
+  ],
+  "evidence": [
+    {
+      "id": 1,
+      "project": 1,
+      "source": 1,
+      "target": 3,
+      "relation": "recommends",
+      "source_url": "https://github.com/fictional-nicktrail",
+      "location": "bio",
+      "snippet": "I recommend https://github.com/another-fictional/demo",
+      "fetched": "2026-10-24T16:12:30.737601+00:00",
+      "method": "parser",
+      "assessment": "clue",
+      "decision": "unknown",
+      "contradictions": "",
+      "author": "",
+      "post_date": "",
+      "context": "own",
+      "current": 1,
+      "last_seen": "2026-10-24T16:12:30.737615+00:00"
+    },
+    {
+      "id": 2,
+      "project": 1,
+      "source": 1,
+      "target": 2,
+      "relation": "links",
+      "source_url": "https://github.com/fictional-nicktrail",
+      "location": "blog",
+      "snippet": "https://nicktrail.example/about",
+      "fetched": "2026-10-24T16:12:30.739872+00:00",
+      "method": "parser",
+      "assessment": "clue",
+      "decision": "unknown",
+      "contradictions": "",
+      "author": "",
+      "post_date": "",
+      "context": "own",
+      "current": 1,
+      "last_seen": "2026-10-24T16:12:30.739881+00:00"
+    },
+    {
+      "id": 3,
+      "project": 1,
+      "source": 2,
+      "target": 1,
+      "relation": "claims_ownership",
+      "source_url": "https://nicktrail.example/about",
+      "location": "page",
+      "snippet": "My GitHub is https://github.com/fictional-nicktrail",
+      "fetched": "2026-10-24T16:12:30.751832+00:00",
+      "method": "parser",
+      "assessment": "one_sided",
+      "decision": "unknown",
+      "contradictions": "",
+      "author": "",
+      "post_date": "",
+      "context": "own",
+      "current": 1,
+      "last_seen": "2026-10-24T16:12:30.751835+00:00"
+    },
+    {
+      "id": 4,
+      "project": 1,
+      "source": 2,
+      "target": 4,
+      "relation": "team_contact",
+      "source_url": "https://nicktrail.example/about",
+      "location": "page",
+      "snippet": "Contact: support@nicktrail.example",
+      "fetched": "2026-10-24T16:12:30.757746+00:00",
+      "method": "parser",
+      "assessment": "clue",
+      "decision": "unknown",
+      "contradictions": "",
+      "author": "",
+      "post_date": "",
+      "context": "own",
+      "current": 1,
+      "last_seen": "2026-10-24T16:12:30.757757+00:00"
+    }
+  ],
+  "scope": "Saved public sources only; no result does not mean no account.",
+  "evidence_provenance": {
+    "1": {
+      "origin": "https://github.com/fictional-nicktrail",
+      "root_source": "account:github.com:900000001",
+      "independence_group": "account:github.com:900000001",
+      "derivation": "parser",
+      "current": true,
+      "decision": "unknown"
+    },
+    "2": {
+      "origin": "https://github.com/fictional-nicktrail",
+      "root_source": "account:github.com:900000001",
+      "independence_group": "account:github.com:900000001",
+      "derivation": "parser",
+      "current": true,
+      "decision": "unknown"
+    },
+    "3": {
+      "origin": "https://nicktrail.example/about",
+      "root_source": "origin:nicktrail.example",
+      "independence_group": "origin:nicktrail.example",
+      "derivation": "parser",
+      "current": true,
+      "decision": "unknown"
+    },
+    "4": {
+      "origin": "https://nicktrail.example/about",
+      "root_source": "origin:nicktrail.example",
+      "independence_group": "origin:nicktrail.example",
+      "derivation": "parser",
+      "current": true,
+      "decision": "unknown"
+    }
+  },
+  "focus": [],
+  "candidate_hints": [],
+  "historical_addresses": [
+    {
+      "project": 1,
+      "node": 1,
+      "url": "https://github.com/fictional-nicktrail",
+      "first_seen": "2026-10-24T16:12:30.729605+00:00",
+      "last_seen": "2026-10-24T16:12:30.732214+00:00"
+    },
+    {
+      "project": 1,
+      "node": 2,
+      "url": "https://nicktrail.example/about",
+      "first_seen": "2026-10-24T16:12:30.747441+00:00",
+      "last_seen": "2026-10-24T16:12:30.749355+00:00"
+    }
+  ],
+  "identity_clusters": {
+    "clusters": [
+      {
+        "members": [
+          {
+            "id": 1,
+            "url": "https://github.com/fictional-nicktrail",
+            "platform": "GitHub",
+            "ownership": "mine",
+            "alias": "fictional-nicktrail",
+            "focus": false
+          },
+          {
+            "id": 2,
+            "url": "https://nicktrail.example/about",
+            "platform": "Strona",
+            "ownership": "mine",
+            "alias": null,
+            "focus": false
+          }
+        ],
+        "bridges": [
+          {
+            "a": 1,
+            "b": 2,
+            "score": 2.0,
+            "probability": 0.8808,
+            "tier": "cluster",
+            "contradiction_evidence": [],
+            "independent_signals": 1,
+            "facts": [
+              {
+                "kind": "reciprocal_verified",
+                "why": "Reciprocal links with at least one explicit declaration (rel=me, sameAs, website field or Keybase proof)",
+                "weight": 6.0,
+                "evidence": [
+                  2,
+                  3
+                ],
+                "stored_fields": [],
+                "repeats": 0
+              }
+            ],
+            "identity_confirmed": false
+          }
+        ],
+        "site_pages": {},
+        "weakest_bridge_probability": 0.8808,
+        "identity_confirmed": false,
+        "contains_your_account": true,
+        "unreviewed": [],
+        "same_platform_accounts": []
+      }
+    ],
+    "clusters_total": 1,
+    "review_pairs": [],
+    "review_pairs_total": 0,
+    "model": {
+      "prior": -4.0,
+      "cluster_threshold": 1.5,
+      "review_threshold": 0.0,
+      "popular_identifier_cap": 6,
+      "calibrated": false
+    },
+    "skipped_popular_identifiers": 0,
+    "note": "Suggestions based on public evidence. They do not change ownership or confirm identity."
+  },
+  "discovery_scope": []
+}

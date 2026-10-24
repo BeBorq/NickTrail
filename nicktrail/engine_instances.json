@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ForgeFSFE",
+    "host": "git.fsfe.org",
+    "engine": "gitea",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  },
+  {
+    "id": "ForgeBSD",
+    "host": "git.bsd.cafe",
+    "engine": "gitea",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  },
+  {
+    "id": "ForgeDisroot",
+    "host": "git.disroot.org",
+    "engine": "gitea",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  },
+  {
+    "id": "ForgeLix",
+    "host": "git.lix.systems",
+    "engine": "gitea",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  },
+  {
+    "id": "LemmyML",
+    "host": "lemmy.ml",
+    "engine": "lemmy",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  },
+  {
+    "id": "LemmyWorld",
+    "host": "lemmy.world",
+    "engine": "lemmy",
+    "live_status": "UNTESTED",
+    "limitations": "Dost\u0119p anonimowy zale\u017cy od operatora; konfiguracja nie jest dowodem dost\u0119pno\u015bci."
+  }
+]

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.sqlite3*
+.venv/
+.env
+build/
+dist/
+*.egg-info/
+tmp*/
+*.runtime.lock
+
+.local-ai/
+
+.nicktrail-private/
+*.golden.private.json
+*.errors.log
+*.errors.log.old

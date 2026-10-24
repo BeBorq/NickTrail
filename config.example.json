@@ -1,0 +1,8 @@
+{
+  "depth": 2,
+  "profiles": 50,
+  "pages": 20,
+  "queries": 40,
+  "seconds": 120,
+  "per_domain": 15
+}

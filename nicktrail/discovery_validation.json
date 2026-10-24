@@ -1,0 +1,252 @@
+{
+  "date": "2026-10-21",
+  "kind": "bounded_public_smoke_not_identity_accuracy",
+  "adapters": [
+    {
+      "id": "RustForum",
+      "input": "steveklabnik",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 1,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "MozillaForum",
+      "input": "mhoye",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 0,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "GNOMEForum",
+      "input": "ebassi",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 5,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "KDEForum",
+      "input": "nate",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 0,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "JuliaForum",
+      "input": "stevengj",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 1,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "GodotForum",
+      "input": "Calinou",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 1,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "ObsidianForum",
+      "input": "kepano",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 0,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "HuggingFaceForum",
+      "input": "julien-c",
+      "state": "not_found",
+      "matches": 0,
+      "outbound_evidence": 0,
+      "detail": "HTTP 404"
+    },
+    {
+      "id": "ProcessingForum",
+      "input": "quark",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 1,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "DiscourseMeta",
+      "input": "codinghorror",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 9,
+      "detail": "Publiczny profil Discourse; dostęp anonimowy zależy od ustawień forum. Własność niepotwierdzona."
+    },
+    {
+      "id": "StackOverflow",
+      "input": "Jon Skeet",
+      "state": "found",
+      "matches": 6,
+      "outbound_evidence": 9,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "SecuritySE",
+      "input": "Thomas Pornin",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 1,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "SuperUser",
+      "input": "slhck",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 3,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "AskUbuntu",
+      "input": "Jorge Castro",
+      "state": "found",
+      "matches": 6,
+      "outbound_evidence": 6,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "GameDevSE",
+      "input": "DMGregory",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 5,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "MathSE",
+      "input": "Terence Tao",
+      "state": "found",
+      "matches": 2,
+      "outbound_evidence": 0,
+      "detail": "Publiczne wyszukiwanie inname, do 10 wyników; podobna nazwa nie potwierdza osoby."
+    },
+    {
+      "id": "Lichess",
+      "input": "thibault",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 3,
+      "detail": "Publiczny profil API; własność niepotwierdzona."
+    },
+    {
+      "id": "ChessCom",
+      "input": "Hikaru",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 0,
+      "detail": "Publiczny profil API; własność niepotwierdzona."
+    },
+    {
+      "id": "Keybase",
+      "input": "max; reverse github:maxtaco",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 7,
+      "detail": "Both exact and reverse lookup returned public account; signatures not verified."
+    },
+    {
+      "id": "HackerNews",
+      "input": "pg",
+      "state": "found",
+      "matches": 1,
+      "outbound_evidence": 0,
+      "detail": "Official public API."
+    },
+    {
+      "id": "Codewars",
+      "input": "g964",
+      "state": "found",
+      "matches": 1,
+      "detail": "Dokładny publiczny profil API; własność pozostaje niepotwierdzona."
+    },
+    {
+      "id": "Modrinth",
+      "input": "Prospector",
+      "state": "found",
+      "matches": 1,
+      "detail": "Dokładny publiczny profil API; własność pozostaje niepotwierdzona."
+    },
+    {
+      "id": "Codeforces",
+      "input": "tourist",
+      "state": "found",
+      "matches": 1,
+      "detail": "Dokładny publiczny profil API; własność pozostaje niepotwierdzona."
+    },
+    {
+      "id": "Launchpad",
+      "input": "mvo",
+      "state": "found",
+      "matches": 1,
+      "detail": "Dokładny publiczny profil API; własność pozostaje niepotwierdzona."
+    },
+    {
+      "id": "RubyGems",
+      "state": "found",
+      "negative_control": "not_found",
+      "checked_at": "2026-10-21T22:09:38.749400+00:00",
+      "kind": "public_positive_negative_smoke"
+    },
+    {
+      "id": "HuggingFace",
+      "state": "found",
+      "negative_control": "not_found",
+      "checked_at": "2026-10-21T22:09:39.306171+00:00",
+      "kind": "public_positive_negative_smoke"
+    },
+    {
+      "id": "CratesIO",
+      "state": "found",
+      "negative_control": "not_found",
+      "checked_at": "2026-10-21T22:09:40.177056+00:00",
+      "kind": "public_positive_negative_smoke"
+    },
+    {
+      "id": "Speedrun",
+      "state": "found",
+      "negative_control": "not_found",
+      "checked_at": "2026-10-21T22:09:53.150569+00:00",
+      "kind": "public_positive_negative_smoke"
+    }
+  ],
+  "negative_controls15": [
+    {
+      "platform": "Codewars",
+      "alias": "nicktrail_missing_97f1",
+      "state": "not_found",
+      "matches": 0,
+      "detail": "HTTP 404"
+    },
+    {
+      "platform": "Modrinth",
+      "alias": "nicktrail_missing_97f1",
+      "state": "not_found",
+      "matches": 0,
+      "detail": "HTTP 404"
+    },
+    {
+      "platform": "Codeforces",
+      "alias": "nicktrail_missing_97f1",
+      "state": "error",
+      "matches": 0,
+      "detail": "HTTP 400"
+    },
+    {
+      "platform": "Launchpad",
+      "alias": "nicktrail-missing-97f1",
+      "state": "not_found",
+      "matches": 0,
+      "detail": "HTTP 404"
+    }
+  ]
+}

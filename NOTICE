@@ -1,0 +1,9 @@
+NickTrail
+Copyright (c) 2026 NickTrail contributors. Licensed under the MIT License (see LICENSE).
+
+This distribution includes or derives data from the following third-party works:
+
+- Sherlock (https://github.com/sherlock-project/sherlock) site definitions — MIT License.
+  See docs/SHERLOCK-LICENSE.md.
+- Maigret (https://github.com/soxoj/maigret) site definitions — MIT License.
+  See docs/MAIGRET-LICENSE.txt.

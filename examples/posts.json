@@ -1,0 +1,5 @@
+[
+  {"author":"Fictional Person", "date":"2026-01-01", "context":"own", "url":"https://nicktrail.example/posts/1", "text":"My new GitHub is https://github.com/fictional-other"},
+  {"author":"Fictional Person", "context":"own", "text":"I recommend https://github.com/another-fictional/demo"},
+  {"author":"Fictional Person", "context":"quote", "text":"My GitHub is https://github.com/quoted-fictional"}
+]

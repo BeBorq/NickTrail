@@ -1,0 +1,21 @@
+name: Offline tests
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests -v
+      - run: python -m unittest discover -s tests -p web_smoke.py -v
+      - run: python -m nicktrail --db demo.sqlite3 demo
+      - name: Panel checks (Node)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: for f in tests/test_panel_*.js; do node "$f"; done
