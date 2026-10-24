@@ -1,0 +1,26 @@
+const fs=require('fs'),assert=require('assert/strict'),path=require('path');
+const html=fs.readFileSync(path.join(__dirname,'../nicktrail/panel.html'),'utf8');
+function line(name){const start=html.indexOf('function '+name+'(');assert.ok(start>=0,name);return html.slice(start,html.indexOf('\n',start));}
+const controls=new Map();
+const $=id=>{if(!controls.has(id))controls.set(id,{id,hidden:true,disabled:false,textContent:'',title:''});return controls.get(id)};
+const body={classList:{v:new Set(),toggle(c,on){on?this.v.add(c):this.v.delete(c)}}};
+const chips=[{hidden:true,textContent:''},{hidden:true,textContent:''}];
+const document={body,querySelectorAll:()=>chips};
+const make=new Function('document','$',`let picked=new Set(),snapshot,jobState,searchProgress,searchEta;${line('fmtSpan')};${line('renderBulk')};${line('renderRunChips')};return {picked,set(s,j,p,e){snapshot=s;jobState=j;searchProgress=p;searchEta=e},renderBulk,renderRunChips}`);
+const ui=make(document,$);
+const nodes=Array.from({length:12},(_,i)=>({id:i+1,ownership:i===11?'not_mine':'unknown'}));
+ui.set({nodes},{running:false},{},null);
+for(let i=1;i<=12;i++)ui.picked.add(i);
+ui.renderBulk();
+assert.equal(ui.picked.size,11,'rejected accounts drop out of the selection');
+assert.equal($('bulkBar').hidden,false);assert.ok(body.classList.v.has('has-bulk'));
+assert.equal($('bulkDiscover').disabled,true,'more than 10 accounts cannot start discovery');
+for(let i=3;i<=11;i++)ui.picked.delete(i);ui.renderBulk();
+assert.equal($('bulkDiscover').disabled,false);assert.equal($('bulkCount').textContent,'Zaznaczono: 2');
+ui.set({nodes},{running:true,mode:'discover',started:Date.now()/1000-30},{total:10,percent:42},{state:'estimate',eta_seconds:180});
+ui.renderBulk();assert.equal($('bulkDiscover').disabled,true,'no bulk start while a job runs');
+ui.renderRunChips();assert.deepEqual(chips.map(c=>[c.hidden,c.textContent]),[[false,'42% · ~3 min'],[false,'42% · ~3 min']]);
+ui.set({nodes},{running:true,mode:'scan',started:Date.now()/1000-75},{},null);ui.renderRunChips();assert.equal(chips[0].textContent,'1:15','other jobs show elapsed time only');
+ui.set({nodes},{running:false},{},null);ui.renderRunChips();assert.ok(chips.every(c=>c.hidden));
+assert.ok(!/value\s*=\s*f\.value|\.value=f\./.test(line('renderKeys')),'saved keys are never written back into inputs');
+console.log('UI bulk bar, run chips and key form passed.');
