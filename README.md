@@ -48,7 +48,7 @@ See [SECURITY.md](SECURITY.md) for the responsible-use policy.
 Requirements: Python 3.11 or newer. The core has no third-party dependencies.
 
 ```bash
-git clone https://github.com/<you>/NickTrail.git
+git clone https://github.com/BeBorq/NickTrail.git
 cd NickTrail
 python -m nicktrail --db my-footprint.sqlite3 serve --port 8770
 ```
