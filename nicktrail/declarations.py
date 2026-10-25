@@ -18,13 +18,17 @@ the self-audit rules:
 Nothing here infers ownership: a profile matching a declared nick is still a
 candidate until the user marks it.
 """
+
 from .related import terms_for
 
 MAX_ALIASES = 4
 
 
 def declared(store, project):
-    rows = store.rows("SELECT kind,url FROM nodes WHERE project=? AND platform='Deklaracja' AND ownership='mine' ORDER BY id", (project,))
+    rows = store.rows(
+        "SELECT kind,url FROM nodes WHERE project=? AND platform='Deklaracja' AND ownership='mine' ORDER BY id",
+        (project,),
+    )
     out = {'alias': [], 'display': [], 'email': [], 'country': [], 'language': []}
     for row in rows:
         values = out.get(row['kind'])
@@ -36,6 +40,7 @@ def declared(store, project):
 def apply(store, project, nickname, aliases, criteria):
     """Return (nickname, aliases, criteria, used) with the user's own declarations added."""
     from .context import criteria as validate, terms as context_terms
+
     if not isinstance(nickname, (str, type(None))) or not isinstance(aliases, (list, tuple, type(None))):
         return nickname, aliases, criteria, {}  # let the normal validation report the bad input
     found = declared(store, project)
@@ -54,11 +59,15 @@ def apply(store, project, nickname, aliases, criteria):
         used['nickname'] = nickname
     if nickname:
         taken = {nickname.casefold(), *(a.casefold() for a in aliases)}
-        extra = [a for a in valid if a.casefold() not in taken][:max(0, MAX_ALIASES - len(aliases))]
+        extra = [a for a in valid if a.casefold() not in taken][: max(0, MAX_ALIASES - len(aliases))]
         if extra:
             aliases += extra
             used['aliases'] = extra
-    if found['display'] and not criteria.get('keywords') and not (criteria.get('first_name') or criteria.get('last_name')):
+    if (
+        found['display']
+        and not criteria.get('keywords')
+        and not (criteria.get('first_name') or criteria.get('last_name'))
+    ):
         criteria['keywords'] = found['display'][0][:160]
         used['display'] = criteria['keywords']
     if found['country'] and not criteria.get('location'):

@@ -6,6 +6,7 @@ beside RFC 9309), how long a refusal is remembered, and how many *different*
 services are read at the same time.  Each single service is still read one
 request at a time with at least the configured pause.
 """
+
 import json
 
 from .storage import SCHEMA_LOCK
@@ -83,6 +84,7 @@ def load(store):
 def apply(store):
     """Load this database's settings into the process-wide network settings."""
     from . import network
+
     values = load(store)
     network.SETTINGS.clear()
     network.SETTINGS.update(values)
@@ -93,13 +95,20 @@ def save(store, changes):
     changes = validate(changes)
     schema(store)
     for key, value in changes.items():
-        store.execute('INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value',
-                      (key, json.dumps(value)))
+        store.execute(
+            'INSERT INTO settings(key,value) VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value',
+            (key, json.dumps(value)),
+        )
     return apply(store)
 
 
 def describe(store):
     values = load(store)
-    return {'values': values, 'defaults': DEFAULTS, 'labels': LABELS, 'limits': LIMITS,
-            'choices': {k: [[v, CHOICE_LABELS[v]] for v in options] for k, options in CHOICES.items()},
-            'note': 'Żadna opcja nie omija CAPTCHA, logowania ani blokad anty-bot. Każdy serwis jest odpytywany po jednym zapytaniu naraz.'}
+    return {
+        'values': values,
+        'defaults': DEFAULTS,
+        'labels': LABELS,
+        'limits': LIMITS,
+        'choices': {k: [[v, CHOICE_LABELS[v]] for v in options] for k, options in CHOICES.items()},
+        'note': 'Żadna opcja nie omija CAPTCHA, logowania ani blokad anty-bot. Każdy serwis jest odpytywany po jednym zapytaniu naraz.',
+    }

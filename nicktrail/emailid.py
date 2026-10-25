@@ -20,6 +20,7 @@ old meaning (used as a durable node key); canonicalization is a second,
 clearly-labelled key used only for linking.  Nothing here contacts the network,
 reads breach data, or decides ownership.
 """
+
 from __future__ import annotations
 import hashlib
 import re
@@ -32,8 +33,16 @@ _GMAIL = {"gmail.com", "googlemail.com"}
 # Providers documented to support "+tag" sub-addressing (tag is stripped for the
 # merge key only).  Conservative allow-list — never guess for unknown hosts.
 _PLUS_TAG = _GMAIL | {
-    "outlook.com", "hotmail.com", "live.com", "fastmail.com",
-    "proton.me", "protonmail.com", "pm.me", "icloud.com", "me.com", "mac.com",
+    "outlook.com",
+    "hotmail.com",
+    "live.com",
+    "fastmail.com",
+    "proton.me",
+    "protonmail.com",
+    "pm.me",
+    "icloud.com",
+    "me.com",
+    "mac.com",
     "yahoo.com",  # Yahoo uses "-" disposable addresses, not "+"; handled below
 }
 

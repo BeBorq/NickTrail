@@ -42,9 +42,16 @@ Polish is the source catalog. Any new user-facing text needs an English entry (`
 for the panel, `nicktrail/system_translations.json` for server messages). `tests/test_localization_complete20.py`
 fails if Polish text leaks into the English interface.
 
+## Code style
+
+Code is formatted with [Black](https://black.readthedocs.io/) (settings in `pyproject.toml`): one
+statement per line, lines up to 110 characters. Prefer small named helpers over long functions; a rule
+about evidence should be readable on its own. CI checks the formatting.
+
 ## Before opening a pull request
 
 ```bash
+black nicktrail tests
 python -m unittest discover -s tests -q
 for f in tests/test_panel_*.js; do node "$f"; done
 python tests/web_smoke.py

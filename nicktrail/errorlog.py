@@ -5,6 +5,7 @@ cause still has to be findable afterwards.  Tracebacks go to
 `<database>.errors.log` beside the user's own database; nothing leaves the
 computer.  The file is capped so it cannot grow without bound.
 """
+
 import os
 import traceback
 from datetime import datetime, timezone

@@ -15,6 +15,7 @@ Safety and privacy rules for this module:
     and rate-limit policy.  It bypasses nothing; many of these sites return a
     block or challenge, which simply becomes a manual-check item.
 """
+
 import re
 from urllib.parse import quote
 
@@ -36,19 +37,30 @@ HOSTS = {'pornhub.com', 'xvideos.com', 'xhamster.com', 'xnxx.com'}
 def is_sensitive_url(url):
     """True for an address on one of the sensitive-category sites (www. ignored)."""
     from urllib.parse import urlsplit
+
     host = (urlsplit(str(url)).hostname or '').lower()
     return host.removeprefix('www.') in HOSTS
 
 
 def sites():
-    return [{'id': k, 'name': v[0], 'profile_url': v[1], 'category': CATEGORY,
-             'username_pattern': PATTERN, 'validation': {'live_status': v[2]}} for k, v in SITES.items()]
+    return [
+        {
+            'id': k,
+            'name': v[0],
+            'profile_url': v[1],
+            'category': CATEGORY,
+            'username_pattern': PATTERN,
+            'validation': {'live_status': v[2]},
+        }
+        for k, v in SITES.items()
+    ]
 
 
 def lookup(term, client):
     """Probe one sensitive site for a username; tag any match as sensitive."""
     from .search import validate_nickname
     from .freeprofiles import probe
+
     site, alias = term.split(':', 1)
     if site not in SITES:
         raise ValueError('Nieznany serwis z kategorii wrażliwej')
@@ -56,8 +68,21 @@ def lookup(term, client):
     if not re.fullmatch(PATTERN, alias):
         return {'state': 'unsupported', 'detail': 'Nick nie spełnia reguł serwisu', 'matches': []}
     name, template, status = SITES[site]
-    service = {'id': site, 'name': name, 'profile_url': template, 'username_pattern': PATTERN,
-               'detection': {'not_found_titles': ['404', 'not found', 'page not found', 'user not found', 'no longer available']}}
+    service = {
+        'id': site,
+        'name': name,
+        'profile_url': template,
+        'username_pattern': PATTERN,
+        'detection': {
+            'not_found_titles': [
+                '404',
+                'not found',
+                'page not found',
+                'user not found',
+                'no longer available',
+            ]
+        },
+    }
     result = probe(service, alias, client)
     for match in result.get('matches', []):
         match.setdefault('data', {})

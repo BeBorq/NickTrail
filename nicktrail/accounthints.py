@@ -17,6 +17,7 @@ from files the user points to on their own computer:
 Nothing is sent anywhere.  A domain is a hint that an account may exist; the
 user decides ("I have an account here", "deleted", "not an account").
 """
+
 import csv
 import io
 import json
@@ -41,44 +42,210 @@ STATUSES = ('new', 'mine', 'closed', 'ignored')
 
 # Mailbox providers: mail from these domains is from people, not from a service.
 PERSONAL = {
-    'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com', 'live.com', 'msn.com', 'yahoo.com', 'ymail.com',
-    'icloud.com', 'me.com', 'mac.com', 'aol.com', 'proton.me', 'protonmail.com', 'pm.me', 'zoho.com', 'gmx.com',
-    'gmx.net', 'gmx.de', 'web.de', 'mail.com', 'yandex.ru', 'yandex.com', 'mail.ru', 'wp.pl', 'o2.pl', 'onet.pl',
-    'op.pl', 'onet.eu', 'interia.pl', 'interia.eu', 'poczta.fm', 'gazeta.pl', 'tlen.pl', 'vp.pl', 'autograf.pl',
-    'buziaczek.pl', 'tutanota.com', 'tuta.io', 'fastmail.com', 'hey.com', 'seznam.cz', 'ukr.net', 'i.ua', 'meta.ua',
+    'gmail.com',
+    'googlemail.com',
+    'outlook.com',
+    'hotmail.com',
+    'live.com',
+    'msn.com',
+    'yahoo.com',
+    'ymail.com',
+    'icloud.com',
+    'me.com',
+    'mac.com',
+    'aol.com',
+    'proton.me',
+    'protonmail.com',
+    'pm.me',
+    'zoho.com',
+    'gmx.com',
+    'gmx.net',
+    'gmx.de',
+    'web.de',
+    'mail.com',
+    'yandex.ru',
+    'yandex.com',
+    'mail.ru',
+    'wp.pl',
+    'o2.pl',
+    'onet.pl',
+    'op.pl',
+    'onet.eu',
+    'interia.pl',
+    'interia.eu',
+    'poczta.fm',
+    'gazeta.pl',
+    'tlen.pl',
+    'vp.pl',
+    'autograf.pl',
+    'buziaczek.pl',
+    'tutanota.com',
+    'tuta.io',
+    'fastmail.com',
+    'hey.com',
+    'seznam.cz',
+    'ukr.net',
+    'i.ua',
+    'meta.ua',
 }
 # Second-level suffixes, so "mail.example.co.uk" groups as "example.co.uk".
 TWO_LEVEL = {
-    'co.uk', 'org.uk', 'ac.uk', 'gov.uk', 'com.pl', 'net.pl', 'org.pl', 'edu.pl', 'gov.pl', 'info.pl', 'biz.pl',
-    'waw.pl', 'krakow.pl', 'com.au', 'net.au', 'org.au', 'co.nz', 'co.jp', 'ne.jp', 'or.jp', 'com.br', 'com.mx',
-    'com.ar', 'com.tr', 'co.za', 'com.ua', 'in.ua', 'kiev.ua', 'com.cn', 'com.hk', 'com.sg', 'co.in', 'co.kr',
-    'com.tw', 'co.il', 'com.ru', 'msk.ru', 'spb.ru', 'co.at', 'or.at', 'gv.at',
+    'co.uk',
+    'org.uk',
+    'ac.uk',
+    'gov.uk',
+    'com.pl',
+    'net.pl',
+    'org.pl',
+    'edu.pl',
+    'gov.pl',
+    'info.pl',
+    'biz.pl',
+    'waw.pl',
+    'krakow.pl',
+    'com.au',
+    'net.au',
+    'org.au',
+    'co.nz',
+    'co.jp',
+    'ne.jp',
+    'or.jp',
+    'com.br',
+    'com.mx',
+    'com.ar',
+    'com.tr',
+    'co.za',
+    'com.ua',
+    'in.ua',
+    'kiev.ua',
+    'com.cn',
+    'com.hk',
+    'com.sg',
+    'co.in',
+    'co.kr',
+    'com.tw',
+    'co.il',
+    'com.ru',
+    'msk.ru',
+    'spb.ru',
+    'co.at',
+    'or.at',
+    'gv.at',
 }
 SIGNALS = (
-    ('deletion', ('usuniecie konta', 'konto zostalo usuniete', 'account deletion', 'account has been deleted',
-                  'account deleted', 'delete your account', 'konto usuniete', 'kontoloschung')),
-    ('welcome', ('witaj', 'witamy', 'welcome', 'willkommen', 'dziekujemy za rejestracje', 'thanks for signing up',
-                 'thank you for registering', 'thanks for joining', 'rejestracj', 'registration', 'sign up', 'signup',
-                 'account created', 'konto zostalo utworzone', 'your new account', 'nowe konto', 'zalozyles konto',
-                 'zalozenie konta', 'get started')),
-    ('verify', ('potwierdz', 'confirm', 'verify', 'verification', 'weryfik', 'aktywuj', 'aktywacja', 'activate',
-                'activation', 'bestatig')),
+    (
+        'deletion',
+        (
+            'usuniecie konta',
+            'konto zostalo usuniete',
+            'account deletion',
+            'account has been deleted',
+            'account deleted',
+            'delete your account',
+            'konto usuniete',
+            'kontoloschung',
+        ),
+    ),
+    (
+        'welcome',
+        (
+            'witaj',
+            'witamy',
+            'welcome',
+            'willkommen',
+            'dziekujemy za rejestracje',
+            'thanks for signing up',
+            'thank you for registering',
+            'thanks for joining',
+            'rejestracj',
+            'registration',
+            'sign up',
+            'signup',
+            'account created',
+            'konto zostalo utworzone',
+            'your new account',
+            'nowe konto',
+            'zalozyles konto',
+            'zalozenie konta',
+            'get started',
+        ),
+    ),
+    (
+        'verify',
+        (
+            'potwierdz',
+            'confirm',
+            'verify',
+            'verification',
+            'weryfik',
+            'aktywuj',
+            'aktywacja',
+            'activate',
+            'activation',
+            'bestatig',
+        ),
+    ),
     ('reset', ('reset', 'nowe haslo', 'zmiana hasla', 'zmien haslo', 'password', 'haslo', 'passwort')),
-    ('login', ('logowanie', 'zalogowano', 'sign-in', 'sign in', 'signed in', 'new login', 'new device',
-               'nowe urzadzenie', 'security alert', 'alert bezpieczenstwa', 'kod weryfikacyjny', 'verification code',
-               'login code', 'kod logowania', 'one-time', 'two-factor', '2fa', 'anmeldung')),
+    (
+        'login',
+        (
+            'logowanie',
+            'zalogowano',
+            'sign-in',
+            'sign in',
+            'signed in',
+            'new login',
+            'new device',
+            'nowe urzadzenie',
+            'security alert',
+            'alert bezpieczenstwa',
+            'kod weryfikacyjny',
+            'verification code',
+            'login code',
+            'kod logowania',
+            'one-time',
+            'two-factor',
+            '2fa',
+            'anmeldung',
+        ),
+    ),
 )
 ACCOUNT_SIGNALS = {'welcome', 'verify', 'reset', 'login', 'deletion'}
 
-URL_COLUMNS = ('url', 'login_uri', 'website', 'web site', 'uri', 'origin', 'login url', 'origin_url', 'site', 'hostname', 'urls')
-USER_COLUMNS = ('username', 'login_username', 'login name', 'login', 'user name', 'user', 'email', 'e-mail', 'username1', 'login_name')
+URL_COLUMNS = (
+    'url',
+    'login_uri',
+    'website',
+    'web site',
+    'uri',
+    'origin',
+    'login url',
+    'origin_url',
+    'site',
+    'hostname',
+    'urls',
+)
+USER_COLUMNS = (
+    'username',
+    'login_username',
+    'login name',
+    'login',
+    'user name',
+    'user',
+    'email',
+    'e-mail',
+    'username1',
+    'login_name',
+)
 
 
 def schema(store):
     with SCHEMA_LOCK:
-        store.db.execute('''CREATE TABLE IF NOT EXISTS account_hints(project INTEGER REFERENCES projects ON DELETE CASCADE,
+        store.db.execute(
+            '''CREATE TABLE IF NOT EXISTS account_hints(project INTEGER REFERENCES projects ON DELETE CASCADE,
             source TEXT,domain TEXT,first_seen TEXT,last_seen TEXT,messages INTEGER DEFAULT 0,signals TEXT DEFAULT '{}',
-            senders TEXT DEFAULT '[]',usernames TEXT DEFAULT '[]',status TEXT DEFAULT 'new',PRIMARY KEY(project,source,domain))''')
+            senders TEXT DEFAULT '[]',usernames TEXT DEFAULT '[]',status TEXT DEFAULT 'new',PRIMARY KEY(project,source,domain))'''
+        )
         store.db.commit()
 
 
@@ -149,7 +316,9 @@ class Collector:
             return
         kind = classify(_decoded(headers.get('Subject', '')))
         day = _date(headers.get('Date', ''))
-        entry = self.domains.setdefault(domain, {'messages': 0, 'signals': {}, 'first': '', 'last': '', 'senders': {}})
+        entry = self.domains.setdefault(
+            domain, {'messages': 0, 'signals': {}, 'first': '', 'last': '', 'senders': {}}
+        )
         entry['messages'] += 1
         entry['signals'][kind] = entry['signals'].get(kind, 0) + 1
         if day:
@@ -205,7 +374,9 @@ def scan_mailbox(path, own_addresses=()):
                 if count > MAX_EML_FILES:
                     break
                 with file.open('rb') as stream:
-                    (_mbox_headers if file.suffix.lower() in ('.mbox', '.mbx') else _eml_headers)(stream, collector)
+                    (_mbox_headers if file.suffix.lower() in ('.mbox', '.mbx') else _eml_headers)(
+                        stream, collector
+                    )
     elif path.suffix.lower() == '.zip':
         with zipfile.ZipFile(path) as archive:
             for info in archive.infolist():
@@ -213,7 +384,9 @@ def scan_mailbox(path, own_addresses=()):
                 if info.is_dir() or not name.endswith(('.mbox', '.mbx', '.eml')):
                     continue
                 with archive.open(info) as stream:
-                    (_eml_headers if name.endswith('.eml') else _mbox_headers)(io.BufferedReader(stream), collector)
+                    (_eml_headers if name.endswith('.eml') else _mbox_headers)(
+                        io.BufferedReader(stream), collector
+                    )
     elif path.suffix.lower() == '.eml':
         with path.open('rb') as stream:
             _eml_headers(stream, collector)
@@ -221,7 +394,9 @@ def scan_mailbox(path, own_addresses=()):
         with path.open('rb') as stream:
             _mbox_headers(stream, collector)
     if not collector.messages:
-        raise ValueError('Nie znaleziono wiadomości. Wskaż plik .mbox (np. z Google Takeout), folder z plikami .eml albo archiwum .zip.')
+        raise ValueError(
+            'Nie znaleziono wiadomości. Wskaż plik .mbox (np. z Google Takeout), folder z plikami .eml albo archiwum .zip.'
+        )
     return collector
 
 
@@ -270,7 +445,17 @@ def scan_passwords(text):
             domain = registrable(host)
             if not domain:
                 continue
-            entry = domains.setdefault(domain, {'messages': 0, 'signals': {'saved_login': 0}, 'first': '', 'last': '', 'senders': {}, 'usernames': []})
+            entry = domains.setdefault(
+                domain,
+                {
+                    'messages': 0,
+                    'signals': {'saved_login': 0},
+                    'first': '',
+                    'last': '',
+                    'senders': {},
+                    'usernames': [],
+                },
+            )
             entry['messages'] += 1
             entry['signals']['saved_login'] += 1
             if user and len(user) <= 120 and user not in entry['usernames'] and len(entry['usernames']) < 5:
@@ -286,25 +471,56 @@ def save(store, project, source, domains):
     schema(store)
     if not store.rows('SELECT id FROM projects WHERE id=?', (project,)):
         raise ValueError('Nieznany projekt')
-    previous = {r['domain']: r['status'] for r in store.rows('SELECT domain,status FROM account_hints WHERE project=? AND source=?', (project, source))}
+    previous = {
+        r['domain']: r['status']
+        for r in store.rows(
+            'SELECT domain,status FROM account_hints WHERE project=? AND source=?', (project, source)
+        )
+    }
     with store.db:
         store.db.execute('DELETE FROM account_hints WHERE project=? AND source=?', (project, source))
-        store.db.executemany('INSERT INTO account_hints VALUES(?,?,?,?,?,?,?,?,?,?)', [
-            (project, source, domain, entry.get('first', ''), entry.get('last', ''), entry['messages'],
-             json.dumps(entry['signals']), json.dumps(sorted(entry.get('senders', {}), key=lambda s: -entry['senders'][s])[:3], ensure_ascii=False),
-             json.dumps(entry.get('usernames', []), ensure_ascii=False), previous.get(domain, 'new'))
-            for domain, entry in domains.items()])
+        store.db.executemany(
+            'INSERT INTO account_hints VALUES(?,?,?,?,?,?,?,?,?,?)',
+            [
+                (
+                    project,
+                    source,
+                    domain,
+                    entry.get('first', ''),
+                    entry.get('last', ''),
+                    entry['messages'],
+                    json.dumps(entry['signals']),
+                    json.dumps(
+                        sorted(entry.get('senders', {}), key=lambda s: -entry['senders'][s])[:3],
+                        ensure_ascii=False,
+                    ),
+                    json.dumps(entry.get('usernames', []), ensure_ascii=False),
+                    previous.get(domain, 'new'),
+                )
+                for domain, entry in domains.items()
+            ],
+        )
     return len(domains)
 
 
 def import_mailbox(store, project, path):
     if not isinstance(path, str) or not path.strip():
         raise ValueError('Podaj ścieżkę do pliku .mbox, folderu .eml lub archiwum .zip')
-    own = [r['url'] for r in store.rows("SELECT url FROM nodes WHERE project=? AND kind='email' AND ownership='mine'", (project,))]
+    own = [
+        r['url']
+        for r in store.rows(
+            "SELECT url FROM nodes WHERE project=? AND kind='email' AND ownership='mine'", (project,)
+        )
+    ]
     collector = scan_mailbox(path.strip().strip('"'), own)
     saved = save(store, project, 'mail', collector.domains)
     likely = sum(1 for e in collector.domains.values() if ACCOUNT_SIGNALS & set(e['signals']))
-    return {'messages': collector.messages, 'domains': saved, 'likely_accounts': likely, 'skipped_personal': collector.skipped_personal}
+    return {
+        'messages': collector.messages,
+        'domains': saved,
+        'likely_accounts': likely,
+        'skipped_personal': collector.skipped_personal,
+    }
 
 
 def import_passwords(store, project, text=None, path=None):
@@ -343,8 +559,20 @@ def view(store, project):
     schema(store)
     merged = {}
     for row in store.rows('SELECT * FROM account_hints WHERE project=?', (project,)):
-        entry = merged.setdefault(row['domain'], {'domain': row['domain'], 'sources': [], 'messages': 0, 'signals': {},
-                                                  'first_seen': '', 'last_seen': '', 'senders': [], 'usernames': [], 'status': 'new'})
+        entry = merged.setdefault(
+            row['domain'],
+            {
+                'domain': row['domain'],
+                'sources': [],
+                'messages': 0,
+                'signals': {},
+                'first_seen': '',
+                'last_seen': '',
+                'senders': [],
+                'usernames': [],
+                'status': 'new',
+            },
+        )
         entry['sources'].append(row['source'])
         entry['messages'] += row['messages'] or 0
         for kind, count in json.loads(row['signals'] or '{}').items():
@@ -365,6 +593,7 @@ def view(store, project):
     out.sort(key=lambda e: (e['status'] == 'ignored', not e['likely_account'], -e['score'], e['domain']))
     nicks = []
     from .search import validate_nickname
+
     for e in out:
         if e['status'] == 'ignored':
             continue

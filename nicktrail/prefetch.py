@@ -5,6 +5,7 @@ caller's thread.  The HTTP client serialises requests per host (one request at
 a time, configured pause included), so a single service sees exactly the same
 traffic as with sequential reading.
 """
+
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -13,7 +14,11 @@ class Prefetcher:
         self.client = client
         self.read = read
         self.workers = workers
-        self.pool = ThreadPoolExecutor(max_workers=workers, thread_name_prefix='nicktrail-read') if workers > 1 else None
+        self.pool = (
+            ThreadPoolExecutor(max_workers=workers, thread_name_prefix='nicktrail-read')
+            if workers > 1
+            else None
+        )
         self.futures = {}
 
     def _run(self, key, task):

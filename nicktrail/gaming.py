@@ -8,6 +8,7 @@ lookup confirms:
 A matching handle is a candidate, never proof of ownership.  Nothing is read or
 sent without the key, and no secret is ever stored in results.
 """
+
 import json
 import os
 import re
@@ -31,32 +32,47 @@ def twitch_lookup(login, client):
     login = str(login).strip()
     if not re.fullmatch(TWITCH_LOGIN, login):
         return {'state': 'unsupported', 'detail': 'Nick nie spełnia reguł Twitch', 'matches': []}
-    response = client.get('https://api.twitch.tv/helix/users?login=' + quote(login.lower(), safe=''),
-                          headers={'Client-Id': os.environ['NICKTRAIL_TWITCH_CLIENT_ID'],
-                                   'Authorization': 'Bearer ' + os.environ['NICKTRAIL_TWITCH_TOKEN']})
+    response = client.get(
+        'https://api.twitch.tv/helix/users?login=' + quote(login.lower(), safe=''),
+        headers={
+            'Client-Id': os.environ['NICKTRAIL_TWITCH_CLIENT_ID'],
+            'Authorization': 'Bearer ' + os.environ['NICKTRAIL_TWITCH_TOKEN'],
+        },
+    )
     if response['state'] != 'found':
         return response
     body = json.loads(response['text'])
     data = body.get('data')
     if not isinstance(data, list):
         raise ValueError('Nieprawidłowa odpowiedź Twitch')
-    d = next((x for x in data if isinstance(x, dict) and str(x.get('login', '')).lower() == login.lower()), None)
+    d = next(
+        (x for x in data if isinstance(x, dict) and str(x.get('login', '')).lower() == login.lower()), None
+    )
     if not d or not str(d.get('id', '')):
         return {'state': 'not_found', 'detail': 'Twitch: brak konta o tym loginie'}
     url = 'https://www.twitch.tv/' + str(d['login']).lower()
     evidence = extract(str(d.get('description') or ''), url, 'bio')
-    return {'state': 'found', 'url': url,
-            'data': {'avatar_url': d.get('profile_image_url'), 'stable_id': 'twitch:' + str(d['id']),
-                     'alias': d.get('login'), 'display': d.get('display_name')},
-            'evidence': evidence}
+    return {
+        'state': 'found',
+        'url': url,
+        'data': {
+            'avatar_url': d.get('profile_image_url'),
+            'stable_id': 'twitch:' + str(d['id']),
+            'alias': d.get('login'),
+            'display': d.get('display_name'),
+        },
+        'evidence': evidence,
+    }
 
 
 def xbox_lookup(gamertag, client):
     gamertag = str(gamertag).strip()
     if not re.fullmatch(XBOX_GAMERTAG, gamertag):
         return {'state': 'unsupported', 'detail': 'Nieprawidłowy gamertag Xbox', 'matches': []}
-    response = client.get('https://xbl.io/api/v2/search/' + quote(gamertag, safe=''),
-                          headers={'X-Authorization': os.environ['NICKTRAIL_XBOX_KEY'], 'Accept': 'application/json'})
+    response = client.get(
+        'https://xbl.io/api/v2/search/' + quote(gamertag, safe=''),
+        headers={'X-Authorization': os.environ['NICKTRAIL_XBOX_KEY'], 'Accept': 'application/json'},
+    )
     if response['state'] != 'found':
         return response
     body = json.loads(response['text'])
@@ -72,10 +88,17 @@ def xbox_lookup(gamertag, client):
             continue
         url = 'https://account.xbox.com/en-us/profile?gamertag=' + quote(name, safe='')
         evidence = extract(str(settings.get('Bio') or ''), url, 'bio')
-        return {'state': 'found', 'url': url,
-                'data': {'avatar_url': settings.get('GameDisplayPicRaw'), 'stable_id': 'xbox:' + str(user.get('id')),
-                         'alias': name, 'display': settings.get('ModernGamertag') or name},
-                'evidence': evidence}
+        return {
+            'state': 'found',
+            'url': url,
+            'data': {
+                'avatar_url': settings.get('GameDisplayPicRaw'),
+                'stable_id': 'xbox:' + str(user.get('id')),
+                'alias': name,
+                'display': settings.get('ModernGamertag') or name,
+            },
+            'evidence': evidence,
+        }
     return {'state': 'not_found', 'detail': 'Xbox: brak dokładnego gamertagu'}
 
 

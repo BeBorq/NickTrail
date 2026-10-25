@@ -16,6 +16,7 @@ migration normalizes rows stored before that change:
 in one transaction and records itself in ``schema_migrations``; running it
 again finds nothing to do.  Profile nodes and HIBP checks are not touched.
 """
+
 import json
 import os
 import sqlite3
@@ -25,7 +26,12 @@ from .emailid import canonical_key
 
 NAME = 'email_canonical_v1'
 # Columns holding JSON lists of node IDs (no foreign key can protect them).
-JSON_NODE_LISTS = (('scans', 'queue'), ('scans', 'visited'), ('search_sources', 'nodes'), ('search_tasks', 'nodes'))
+JSON_NODE_LISTS = (
+    ('scans', 'queue'),
+    ('scans', 'visited'),
+    ('search_sources', 'nodes'),
+    ('search_tasks', 'nodes'),
+)
 
 
 def _data(raw):
@@ -56,24 +62,46 @@ def plan(store):
     for (project, key), rows in sorted(groups.items()):
         if len(rows) == 1:
             if rows[0]['url'] != key:
-                taken = db.execute('SELECT id FROM nodes WHERE project=? AND url=?', (project, key)).fetchone()
+                taken = db.execute(
+                    'SELECT id FROM nodes WHERE project=? AND url=?', (project, key)
+                ).fetchone()
                 if taken:
-                    conflicts.append({'project': project, 'nodes': [rows[0]['id'], taken['id']],
-                                      'reason': 'Kanoniczny adres jest już zajęty przez inny wpis'})
+                    conflicts.append(
+                        {
+                            'project': project,
+                            'nodes': [rows[0]['id'], taken['id']],
+                            'reason': 'Kanoniczny adres jest już zajęty przez inny wpis',
+                        }
+                    )
                 else:
                     renames.append({'project': project, 'node': rows[0]['id']})
             continue
         decisions = {r['ownership'] for r in rows} - {'unknown'}
         if len(decisions) > 1:
-            conflicts.append({'project': project, 'nodes': [r['id'] for r in rows],
-                              'reason': 'Sprzeczne decyzje własności; wymaga ręcznej oceny'})
+            conflicts.append(
+                {
+                    'project': project,
+                    'nodes': [r['id'] for r in rows],
+                    'reason': 'Sprzeczne decyzje własności; wymaga ręcznej oceny',
+                }
+            )
             continue
         survivor = next((r for r in rows if r['url'] == key), rows[0])
-        merges.append({'project': project, 'survivor': survivor['id'],
-                       'duplicates': [r['id'] for r in rows if r['id'] != survivor['id']]})
-    return {'migration': NAME, 'renames': renames, 'merges': merges, 'conflicts': conflicts,
-            'invalid_nodes': invalid,
-            'note': 'Adresy nie są wypisywane. Sprawdzanie HIBP i profile kont nie są zmieniane.'}
+        merges.append(
+            {
+                'project': project,
+                'survivor': survivor['id'],
+                'duplicates': [r['id'] for r in rows if r['id'] != survivor['id']],
+            }
+        )
+    return {
+        'migration': NAME,
+        'renames': renames,
+        'merges': merges,
+        'conflicts': conflicts,
+        'invalid_nodes': invalid,
+        'note': 'Adresy nie są wypisywane. Sprawdzanie HIBP i profile kont nie są zmieniane.',
+    }
 
 
 def _references(db):
@@ -91,7 +119,9 @@ def _move_json_lists(db, duplicate, survivor):
             continue
         if column not in {c[1] for c in db.execute(f'PRAGMA table_info("{table}")')}:
             continue
-        for rowid, raw in db.execute(f'SELECT rowid,"{column}" FROM "{table}" WHERE "{column}" LIKE ?', ('%' + str(duplicate) + '%',)).fetchall():
+        for rowid, raw in db.execute(
+            f'SELECT rowid,"{column}" FROM "{table}" WHERE "{column}" LIKE ?', ('%' + str(duplicate) + '%',)
+        ).fetchall():
             try:
                 values = json.loads(raw)
             except (TypeError, ValueError):
@@ -106,12 +136,19 @@ def _merge(db, refs, survivor, duplicates):
     """Move every reference; return the blocking table if any row would collide."""
     for duplicate in duplicates:
         for table, column in refs:
-            db.execute(f'UPDATE OR IGNORE "{table}" SET "{column}"=? WHERE "{column}"=?', (survivor, duplicate))
+            db.execute(
+                f'UPDATE OR IGNORE "{table}" SET "{column}"=? WHERE "{column}"=?', (survivor, duplicate)
+            )
             if db.execute(f'SELECT 1 FROM "{table}" WHERE "{column}"=? LIMIT 1', (duplicate,)).fetchone():
                 return table
         _move_json_lists(db, duplicate, survivor)
-    rows = [dict(r) for r in db.execute('SELECT * FROM nodes WHERE id IN (%s)' % ','.join('?' * (len(duplicates) + 1)),
-                                        (survivor, *duplicates))]
+    rows = [
+        dict(r)
+        for r in db.execute(
+            'SELECT * FROM nodes WHERE id IN (%s)' % ','.join('?' * (len(duplicates) + 1)),
+            (survivor, *duplicates),
+        )
+    ]
     keep = next(r for r in rows if r['id'] == survivor)
     data = _data(keep['data'])
     forms = set(data.get('published_forms', []))
@@ -124,9 +161,17 @@ def _merge(db, refs, survivor, duplicates):
     data['published_forms'] = sorted(f for f in forms if f != key)[:20]
     if not data['published_forms']:
         del data['published_forms']
-    db.execute('UPDATE nodes SET url=?,ownership=?,seed=?,depth=?,data=? WHERE id=?',
-               (key, ownership, max(r['seed'] for r in rows), min(r['depth'] for r in rows),
-                json.dumps(data, ensure_ascii=False, sort_keys=True), survivor))
+    db.execute(
+        'UPDATE nodes SET url=?,ownership=?,seed=?,depth=?,data=? WHERE id=?',
+        (
+            key,
+            ownership,
+            max(r['seed'] for r in rows),
+            min(r['depth'] for r in rows),
+            json.dumps(data, ensure_ascii=False, sort_keys=True),
+            survivor,
+        ),
+    )
     return None
 
 
@@ -136,11 +181,15 @@ def apply(store, db_path, backup_dir=None):
     db = store.db
     if not (proposal['renames'] or proposal['merges']):
         return proposal | {'applied': False, 'backup': None, 'blocked': []}
-    db.execute('CREATE TABLE IF NOT EXISTS schema_migrations(name TEXT PRIMARY KEY,applied TEXT,summary TEXT)')
+    db.execute(
+        'CREATE TABLE IF NOT EXISTS schema_migrations(name TEXT PRIMARY KEY,applied TEXT,summary TEXT)'
+    )
     db.commit()
     stamp = time.strftime('%Y%m%d-%H%M%S')
     target_dir = backup_dir or os.path.dirname(os.path.abspath(db_path))
-    backup_path = os.path.join(target_dir, os.path.basename(db_path) + '.before-' + NAME + '-' + stamp + '.sqlite3')
+    backup_path = os.path.join(
+        target_dir, os.path.basename(db_path) + '.before-' + NAME + '-' + stamp + '.sqlite3'
+    )
     backup = sqlite3.connect(backup_path)
     try:
         db.backup(backup)
@@ -156,19 +205,33 @@ def apply(store, db_path, backup_dir=None):
             row = db.execute('SELECT url,data FROM nodes WHERE id=?', (item['node'],)).fetchone()
             data = _data(row['data'])
             data['published_forms'] = sorted(set(data.get('published_forms', [])) | {row['url']})[:20]
-            db.execute('UPDATE nodes SET url=?,data=? WHERE id=?',
-                       (canonical_key(row['url'])[0], json.dumps(data, ensure_ascii=False, sort_keys=True), item['node']))
+            db.execute(
+                'UPDATE nodes SET url=?,data=? WHERE id=?',
+                (
+                    canonical_key(row['url'])[0],
+                    json.dumps(data, ensure_ascii=False, sort_keys=True),
+                    item['node'],
+                ),
+            )
         for item in proposal['merges']:
             db.execute('SAVEPOINT email_group')
             table = _merge(db, refs, item['survivor'], item['duplicates'])
             if table:
                 db.execute('ROLLBACK TO email_group')
-                blocked.append(item | {'reason': 'Kolizja wierszy w tabeli ' + table + '; grupa pozostawiona bez zmian'})
+                blocked.append(
+                    item | {'reason': 'Kolizja wierszy w tabeli ' + table + '; grupa pozostawiona bez zmian'}
+                )
             db.execute('RELEASE email_group')
-        summary = {'renamed': len(proposal['renames']), 'merged_groups': len(proposal['merges']) - len(blocked),
-                   'blocked': len(blocked), 'conflicts': len(proposal['conflicts'])}
-        db.execute('INSERT OR REPLACE INTO schema_migrations VALUES(?,?,?)',
-                   (NAME, time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), json.dumps(summary)))
+        summary = {
+            'renamed': len(proposal['renames']),
+            'merged_groups': len(proposal['merges']) - len(blocked),
+            'blocked': len(blocked),
+            'conflicts': len(proposal['conflicts']),
+        }
+        db.execute(
+            'INSERT OR REPLACE INTO schema_migrations VALUES(?,?,?)',
+            (NAME, time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), json.dumps(summary)),
+        )
         db.execute('COMMIT')
     except BaseException:
         db.execute('ROLLBACK')

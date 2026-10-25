@@ -13,6 +13,7 @@ Rules:
     that it is the user's: it is stored as an unverified candidate;
   * only the nick is sent to archive.org, never e-mail addresses or names.
 """
+
 import json
 import re
 from urllib.parse import quote, urlencode, urlsplit
@@ -43,7 +44,10 @@ def _user_sites(store, project):
     if store is None or project is None:
         return {}
     try:
-        rows = store.rows("SELECT DISTINCT domain FROM account_hints WHERE project=? AND status='mine' ORDER BY domain LIMIT ?", (project, MAX_USER_SITES))
+        rows = store.rows(
+            "SELECT DISTINCT domain FROM account_hints WHERE project=? AND status='mine' ORDER BY domain LIMIT ?",
+            (project, MAX_USER_SITES),
+        )
     except Exception:
         return {}
     out = {}
@@ -66,9 +70,22 @@ def pattern(nick):
 
 
 def query(prefix, nick):
-    return API + '?' + urlencode([('url', prefix), ('matchType', 'prefix'), ('output', 'json'),
-                                  ('fl', 'original,timestamp,statuscode'), ('filter', 'statuscode:200'),
-                                  ('filter', 'original:' + pattern(nick)), ('collapse', 'urlkey'), ('limit', str(LIMIT))])
+    return (
+        API
+        + '?'
+        + urlencode(
+            [
+                ('url', prefix),
+                ('matchType', 'prefix'),
+                ('output', 'json'),
+                ('fl', 'original,timestamp,statuscode'),
+                ('filter', 'statuscode:200'),
+                ('filter', 'original:' + pattern(nick)),
+                ('collapse', 'urlkey'),
+                ('limit', str(LIMIT)),
+            ]
+        )
+    )
 
 
 def _address(original, prefix, nick):
@@ -88,12 +105,12 @@ def _address(original, prefix, nick):
         return None
     segments = [s for s in p.path.split('/') if s]
     base = [s for s in want_path.split('/') if s]
-    if [s.lower() for s in segments[:len(base)]] != base:
+    if [s.lower() for s in segments[: len(base)]] != base:
         return None
     own = re.compile(r'(?i)(?<![A-Za-z0-9])' + re.escape(nick) + r'(?![A-Za-z0-9])')
     for index in range(len(base), len(segments)):
         if own.search(segments[index]):
-            path = '/' + '/'.join(segments[:index + 1])
+            path = '/' + '/'.join(segments[: index + 1])
             return 'https://' + host + quote(path, safe="/-_.~%@!$&'()*+,;=:")
     return None
 
@@ -109,6 +126,7 @@ def _entry(site):
 
 def lookup(term, client):
     from .search import validate_nickname
+
     site, nick = term.split(':', 1)
     entry = _entry(site)
     nick = validate_nickname(nick)
@@ -136,13 +154,34 @@ def lookup(term, client):
         seen.add(key)
         stamp = str(row[1])[:8]
         archived = stamp[:4] + '-' + stamp[4:6] + '-' + stamp[6:8] if re.fullmatch(r'\d{8}', stamp) else ''
-        matches.append({'url': url, 'evidence': [],
-                        'data': {'indexed_only': True, 'discovery_provider': 'Wayback', 'archived_at': archived,
-                                 'search_title': entry['name'] + ' — adres w archiwum internetu',
-                                 'search_snippet': 'Zapisany w archiwum ' + archived + '. Konto mogło zostać usunięte; nie potwierdza właściciela.'}})
+        matches.append(
+            {
+                'url': url,
+                'evidence': [],
+                'data': {
+                    'indexed_only': True,
+                    'discovery_provider': 'Wayback',
+                    'archived_at': archived,
+                    'search_title': entry['name'] + ' — adres w archiwum internetu',
+                    'search_snippet': 'Zapisany w archiwum '
+                    + archived
+                    + '. Konto mogło zostać usunięte; nie potwierdza właściciela.',
+                },
+            }
+        )
         if len(matches) >= LIMIT:
             break
     if not matches:
-        return {'state': 'not_found', 'matches': [], 'detail': entry['name'] + ': brak adresu z tym nickiem w archiwum'}
-    return {'state': 'unverified', 'matches': matches,
-            'detail': entry['name'] + ': ' + str(len(matches)) + ' adres(y) z archiwum internetu; do sprawdzenia ręcznie'}
+        return {
+            'state': 'not_found',
+            'matches': [],
+            'detail': entry['name'] + ': brak adresu z tym nickiem w archiwum',
+        }
+    return {
+        'state': 'unverified',
+        'matches': matches,
+        'detail': entry['name']
+        + ': '
+        + str(len(matches))
+        + ' adres(y) z archiwum internetu; do sprawdzenia ręcznie',
+    }
