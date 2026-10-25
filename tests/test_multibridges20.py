@@ -1,4 +1,5 @@
 """Discovery from several accounts the user picked, on the fictional scenario web."""
+
 import tempfile
 import unittest
 from contextlib import ExitStack
@@ -10,6 +11,7 @@ from tests import scenario_web as S
 class MultiRootTests(unittest.TestCase):
     def test_two_picked_accounts_share_one_budget_and_rejected_is_skipped(self):
         from nicktrail.bridgeflow import run_many
+
         with tempfile.TemporaryDirectory() as directory:
             store, project = S.run(persona=S.PERSONA, workdir=directory, bridges=False)
             try:
@@ -23,7 +25,13 @@ class MultiRootTests(unittest.TestCase):
                     for module in S.CLIENT_MODULES:
                         stack.enter_context(patch(module + '.Client', S.FixtureWeb))
                     client = S.FixtureWeb(queries=120, seconds=180)
-                    out = run_many(store, project, [seed, other, rejected, seed], {'queries': 90, 'seconds': 180}, client=client)
+                    out = run_many(
+                        store,
+                        project,
+                        [seed, other, rejected, seed],
+                        {'queries': 90, 'seconds': 180},
+                        client=client,
+                    )
                 self.assertEqual(out['roots'], [seed, other, rejected])
                 self.assertEqual(out['budget_per_account'], {'queries': 30, 'seconds': 60, 'per_domain': 15})
                 self.assertEqual([r['root'] for r in out['runs']], [seed, other, rejected])
@@ -36,6 +44,7 @@ class MultiRootTests(unittest.TestCase):
 
     def test_limits(self):
         from nicktrail.bridgeflow import run_many
+
         with self.assertRaises(ValueError):
             run_many(None, 1, [])
         with self.assertRaises(ValueError):

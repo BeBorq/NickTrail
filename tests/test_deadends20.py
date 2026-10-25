@@ -13,7 +13,9 @@ class DeadEndTests(unittest.TestCase):
         self.dir = tempfile.TemporaryDirectory()
         self.store = Store(os.path.join(self.dir.name, 'd.sqlite3'))
         self.p = self.store.project('fictional')
-        self.seed = self.store.apply_profile(self.p, 'https://github.com/seed', {'alias': 'seed', 'stable_id': '1'})
+        self.seed = self.store.apply_profile(
+            self.p, 'https://github.com/seed', {'alias': 'seed', 'stable_id': '1'}
+        )
         self.store.decide(self.seed, 'mine')
 
     def tearDown(self):
@@ -27,10 +29,25 @@ class DeadEndTests(unittest.TestCase):
         other = self.store.apply_profile(self.p, 'https://gitlab.com/other-nick', {'alias': 'other-nick'})
         hub = self.store.add(self.p, 'https://linktr.ee/hubname', seed=False)
         self.store.execute("UPDATE nodes SET state='blocked' WHERE id=?", (hub,))
-        record(self.store, self.store.node(self.seed), [
-            {'url': 'https://gitlab.com/other-nick', 'relation': 'links', 'location': 'bio', 'snippet': 'x'},
-            {'url': 'https://linktr.ee/hubname', 'relation': 'links', 'location': 'bio', 'snippet': 'x'},
-            {'email': 'only-here@gmail.com', 'relation': 'public_contact_occurrence', 'location': 'bio', 'snippet': 'x'}])
+        record(
+            self.store,
+            self.store.node(self.seed),
+            [
+                {
+                    'url': 'https://gitlab.com/other-nick',
+                    'relation': 'links',
+                    'location': 'bio',
+                    'snippet': 'x',
+                },
+                {'url': 'https://linktr.ee/hubname', 'relation': 'links', 'location': 'bio', 'snippet': 'x'},
+                {
+                    'email': 'only-here@gmail.com',
+                    'relation': 'public_contact_occurrence',
+                    'location': 'bio',
+                    'snippet': 'x',
+                },
+            ],
+        )
         found = self.kinds()
         self.assertIn(('ALIAS_DEAD_END', 'https://gitlab.com/other-nick'), found)
         self.assertIn(('IDENTITY_HUB_DEAD_END', 'https://linktr.ee/hubname'), found)
@@ -39,11 +56,29 @@ class DeadEndTests(unittest.TestCase):
 
     def test_searched_alias_and_rejected_accounts_are_not_dead_ends(self):
         self.store.apply_profile(self.p, 'https://gitlab.com/other-nick', {'alias': 'other-nick'})
-        record(self.store, self.store.node(self.seed), [{'url': 'https://gitlab.com/other-nick', 'relation': 'links', 'location': 'bio', 'snippet': 'x'}])
+        record(
+            self.store,
+            self.store.node(self.seed),
+            [
+                {
+                    'url': 'https://gitlab.com/other-nick',
+                    'relation': 'links',
+                    'location': 'bio',
+                    'snippet': 'x',
+                }
+            ],
+        )
         from nicktrail.search import schema
+
         schema(self.store)
-        search = self.store.execute("INSERT INTO searches(project,nickname,started,status,options) VALUES(?,?,?,?,?)", (self.p, 'seed', '', 'completed', '{}')).lastrowid
-        self.store.execute("INSERT INTO search_tasks(search,platform,term,mode) VALUES(?,?,?,?)", (search, 'GitHub', 'other-nick', 'exact'))
+        search = self.store.execute(
+            "INSERT INTO searches(project,nickname,started,status,options) VALUES(?,?,?,?,?)",
+            (self.p, 'seed', '', 'completed', '{}'),
+        ).lastrowid
+        self.store.execute(
+            "INSERT INTO search_tasks(search,platform,term,mode) VALUES(?,?,?,?)",
+            (search, 'GitHub', 'other-nick', 'exact'),
+        )
         self.assertFalse({k for k in self.kinds() if k[0] == 'ALIAS_DEAD_END'})
         other = self.store.rows("SELECT id FROM nodes WHERE url='https://gitlab.com/other-nick'")[0]['id']
         self.store.execute("DELETE FROM search_tasks")

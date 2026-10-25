@@ -28,9 +28,13 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(client.count, 1)
         self.assertEqual(self.store.node(ids[0])['state'], 'found')
         self.assertEqual(self.store.node(ids[0])['ownership'], 'unknown')
-        candidates = [n for n in self.store.snapshot(self.project)['nodes'] if n['url']=='https://nicktrail.example/about']
+        candidates = [
+            n
+            for n in self.store.snapshot(self.project)['nodes']
+            if n['url'] == 'https://nicktrail.example/about'
+        ]
         self.assertEqual(candidates[0]['state'], 'unverified')
-        self.assertFalse(self.store.snapshot(self.project)['evidence'][0]['relation']=='claims_ownership')
+        self.assertFalse(self.store.snapshot(self.project)['evidence'][0]['relation'] == 'claims_ownership')
 
     def test_candidate_permission_survives_pause_resume(self):
         ids = prepare_nickname(self.store, self.project, 'fictional-nicktrail')
@@ -62,7 +66,18 @@ class DiscoveryTests(unittest.TestCase):
         self.assertFalse(self.store.snapshot(self.project)['scans'])
 
     def test_bad_nicknames_do_not_create_nodes(self):
-        for nickname in ('', '../login', 'a?x=1', '-alice', 'alice-', 'a--b', 'ąlice', 'a'*40, 'settings', 'a b'):
+        for nickname in (
+            '',
+            '../login',
+            'a?x=1',
+            '-alice',
+            'alice-',
+            'a--b',
+            'ąlice',
+            'a' * 40,
+            'settings',
+            'a b',
+        ):
             with self.subTest(nickname=nickname), self.assertRaises(ValueError):
                 prepare_nickname(self.store, self.project, nickname)
         self.assertFalse(self.store.snapshot(self.project)['nodes'])
@@ -76,25 +91,37 @@ class DiscoveryTests(unittest.TestCase):
     def test_limits_also_apply_to_explicit_candidates(self):
         ids = prepare_nickname(self.store, self.project, 'fictional-nicktrail')
         client = FixtureClient()
-        id = scan(self.store, self.project, {'profiles':0}, client=client, targets=ids)
+        id = scan(self.store, self.project, {'profiles': 0}, client=client, targets=ids)
         self.assertEqual(client.count, 0)
-        self.assertEqual(self.store.rows('SELECT status FROM scans WHERE id=?', (id,))[0]['status'], 'limited')
+        self.assertEqual(
+            self.store.rows('SELECT status FROM scans WHERE id=?', (id,))[0]['status'], 'limited'
+        )
 
     def test_strict_limit_validation(self):
-        for opts in ({'queries':True}, {'queries':-1}, {'unknown':1}):
+        for opts in ({'queries': True}, {'queries': -1}, {'unknown': 1}):
             with self.subTest(opts=opts), self.assertRaises(ValueError):
                 scan(self.store, self.project, opts)
 
     def test_cli_search_uses_shared_engine(self):
         from nicktrail.__main__ import main
+
         path = str(Path(self.tmp.name) / 'cli.sqlite3')
         out = io.StringIO()
-        with patch('sys.argv', ['nicktrail', '--db', path, 'create', 'Test']), redirect_stdout(out): main()
+        with patch('sys.argv', ['nicktrail', '--db', path, 'create', 'Test']), redirect_stdout(out):
+            main()
         out = io.StringIO()
-        with patch('sys.argv', ['nicktrail', '--db', path, 'search', '1', 'fictional-nicktrail','--github-only']), patch('nicktrail.engine.Client', return_value=FixtureClient()), redirect_stdout(out): main()
+        with (
+            patch(
+                'sys.argv', ['nicktrail', '--db', path, 'search', '1', 'fictional-nicktrail', '--github-only']
+            ),
+            patch('nicktrail.engine.Client', return_value=FixtureClient()),
+            redirect_stdout(out),
+        ):
+            main()
         result = json.loads(out.getvalue())
         self.assertEqual(result['nodes'][0]['state'], 'found')
         self.assertEqual(result['nodes'][0]['ownership'], 'unknown')
 
 
-if __name__ == '__main__': unittest.main()
+if __name__ == '__main__':
+    unittest.main()

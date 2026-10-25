@@ -24,3 +24,8 @@ packages = ["nicktrail"]
 
 [tool.setuptools.package-data]
 nicktrail = ["*.html", "*.json"]
+
+[tool.black]
+line-length = 110
+target-version = ["py311"]
+skip-string-normalization = true

@@ -13,15 +13,27 @@ class ImportAccountsTests(unittest.TestCase):
         self.p = self.store.project('fictional')
 
     def tearDown(self):
-        self.store.db.close(); self.dir.cleanup()
+        self.store.db.close()
+        self.dir.cleanup()
 
     def owned(self):
         return sorted(n['url'] for n in self.store.snapshot(self.p)['nodes'] if n['ownership'] == 'mine')
 
     def test_urls_and_service_handle_become_confirmed_anchors(self):
-        r = import_accounts(self.store, self.p, [
-            'https://github.com/quillonior', 'hackerone: quillon', 'bugcrowd: quillon', 'x: quillonior',
-            '# a comment', '', 'https://github.com/quillonior'], mine=True)
+        r = import_accounts(
+            self.store,
+            self.p,
+            [
+                'https://github.com/quillonior',
+                'hackerone: quillon',
+                'bugcrowd: quillon',
+                'x: quillonior',
+                '# a comment',
+                '',
+                'https://github.com/quillonior',
+            ],
+            mine=True,
+        )
         self.assertEqual(r['added'], 4)
         self.assertEqual(r['confirmed'], 4)
         self.assertEqual(r['invalid_count'], 0)
@@ -34,12 +46,22 @@ class ImportAccountsTests(unittest.TestCase):
         self.assertEqual(self.owned(), [])
 
     def test_bad_lines_are_reported_not_fatal(self):
-        r = import_accounts(self.store, self.p, ['not a url', 'ftp://evil.example/x', 'http://localhost/a', 'random words here'], mine=True)
+        r = import_accounts(
+            self.store,
+            self.p,
+            ['not a url', 'ftp://evil.example/x', 'http://localhost/a', 'random words here'],
+            mine=True,
+        )
         self.assertEqual(r['added'], 0)
         self.assertGreaterEqual(r['invalid_count'], 3)
 
     def test_private_and_app_route_urls_are_rejected(self):
-        r = import_accounts(self.store, self.p, ['http://127.0.0.1/x', 'https://github.com/settings/profile?token=secret'], mine=True)
+        r = import_accounts(
+            self.store,
+            self.p,
+            ['http://127.0.0.1/x', 'https://github.com/settings/profile?token=secret'],
+            mine=True,
+        )
         self.assertEqual(r['added'], 0)
 
     def test_unknown_project(self):

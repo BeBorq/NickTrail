@@ -25,9 +25,18 @@ class Wayback:
         if Wayback.blocked_after is not None and len(Wayback.calls) > Wayback.blocked_after:
             return {'state': 'blocked', 'detail': 'HTTP 429; RATE_LIMITED'}
         from urllib.parse import parse_qs, urlsplit
+
         original = parse_qs(urlsplit(url).query)['url'][0]
-        body = {'archived_snapshots': {'closest': {'available': True, 'status': '200',
-                'url': 'https://web.archive.org/web/20150101000000/' + original, 'timestamp': '20150101000000'}}}
+        body = {
+            'archived_snapshots': {
+                'closest': {
+                    'available': True,
+                    'status': '200',
+                    'url': 'https://web.archive.org/web/20150101000000/' + original,
+                    'timestamp': '20150101000000',
+                }
+            }
+        }
         return {'state': 'found', 'text': json.dumps(body), 'url': url}
 
 
@@ -36,9 +45,13 @@ class HistoricalAutoTests(unittest.TestCase):
         self.dir = tempfile.TemporaryDirectory()
         self.store = Store(os.path.join(self.dir.name, 'h.sqlite3'))
         self.p = self.store.project('fictional')
-        self.mine = self.store.apply_profile(self.p, 'https://github.com/seed', {'alias': 'seed', 'stable_id': '1'})
+        self.mine = self.store.apply_profile(
+            self.p, 'https://github.com/seed', {'alias': 'seed', 'stable_id': '1'}
+        )
         self.store.decide(self.mine, 'mine')
-        self.other = [self.store.apply_profile(self.p, f'https://gitlab.com/n{i}', {'alias': f'n{i}'}) for i in range(4)]
+        self.other = [
+            self.store.apply_profile(self.p, f'https://gitlab.com/n{i}', {'alias': f'n{i}'}) for i in range(4)
+        ]
         self.store.decide(self.other[0], 'not_mine')
         Wayback.calls, Wayback.blocked_after = [], None
 

@@ -16,15 +16,23 @@ class CooldownWaitTests(unittest.TestCase):
     def setUp(self):
         self.dir = tempfile.TemporaryDirectory()
         self.store = Store(os.path.join(self.dir.name, 'c.sqlite3'))
-        search_schema(self.store); cooldown_schema(self.store)
+        search_schema(self.store)
+        cooldown_schema(self.store)
         self.p = self.store.project('fictional')
-        self.store.execute("INSERT INTO searches(project,nickname,started,status,options) VALUES(?,?,?,?,?)", (self.p, 'nick', '2026-10-22T21:00:00', 'paused', '{}'))
+        self.store.execute(
+            "INSERT INTO searches(project,nickname,started,status,options) VALUES(?,?,?,?,?)",
+            (self.p, 'nick', '2026-10-22T21:00:00', 'paused', '{}'),
+        )
         self.id = self.store.rows('SELECT id FROM searches')[0]['id']
-        self.store.execute("INSERT INTO search_tasks(search,platform,term,mode,state,detail) VALUES(?,?,?,?,?,?)", (self.id, 'Roblox', 'nick', 'related', 'pending', 'Przerwa zalecona przez API'))
+        self.store.execute(
+            "INSERT INTO search_tasks(search,platform,term,mode,state,detail) VALUES(?,?,?,?,?,?)",
+            (self.id, 'Roblox', 'nick', 'related', 'pending', 'Przerwa zalecona przez API'),
+        )
         self.calls = []
 
     def tearDown(self):
-        self.store.db.close(); self.dir.cleanup()
+        self.store.db.close()
+        self.dir.cleanup()
 
     def fake_discover(self, store, project, resume=None, stopped=None, stop_after_exact=False):
         self.calls.append(time.time())
@@ -32,11 +40,16 @@ class CooldownWaitTests(unittest.TestCase):
         store.execute("UPDATE searches SET status='completed' WHERE id=?", (resume,))
 
     def cooldown(self, seconds):
-        self.store.execute('INSERT INTO provider_cooldowns(host,until_epoch,updated,blocks) VALUES(?,?,?,?)', ('users.roblox.com', time.time() + seconds, time.time(), 6))
+        self.store.execute(
+            'INSERT INTO provider_cooldowns(host,until_epoch,updated,blocks) VALUES(?,?,?,?)',
+            ('users.roblox.com', time.time() + seconds, time.time(), 6),
+        )
 
     def run_search(self, stopped=lambda: False):
         with mock.patch('nicktrail.search.discover', self.fake_discover):
-            return autoresume.search(self.store, self.p, self.id, stopped, lambda: time.sleep(0.1) or stopped())
+            return autoresume.search(
+                self.store, self.p, self.id, stopped, lambda: time.sleep(0.1) or stopped()
+            )
 
     def test_waits_out_a_short_provider_pause_then_finishes(self):
         self.cooldown(1.5)
@@ -66,7 +79,9 @@ class CooldownWaitTests(unittest.TestCase):
 
     def test_eta_reports_paused_search_instead_of_a_finish_time(self):
         from nicktrail.eta import estimate, schema
-        schema(self.store); self.cooldown(60)
+
+        schema(self.store)
+        self.cooldown(60)
         out = estimate(self.store, self.id, running=False)
         self.assertEqual(out['state'], 'paused')
         self.assertEqual(out['waiting']['groups'][0]['platform'], 'Roblox')

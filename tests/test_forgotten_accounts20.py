@@ -1,4 +1,5 @@
 """rc17: forgotten-account hints from the user's own mailbox / password export, and archive search."""
+
 import json
 import os
 import tempfile
@@ -10,19 +11,23 @@ from unittest.mock import patch
 from nicktrail import accounthints, archivesearch
 from nicktrail.storage import Store
 
-MBOX = (b'From 1@x Mon Jan  3 10:00:00 +0000 2022\n'
-        b'From: Shinden <noreply@shinden.pl>\nSubject: =?utf-8?q?Witamy!_Potwierd=C5=BA_konto?=\nDate: Mon, 03 Jan 2022 10:00:00 +0000\n\n'
-        b'Body line.\n\nFrom the body without escaping, no year here\n\n'
-        b'From 2@x Tue Jan  4 10:00:00 +0000 2022\n'
-        b'From: Riot Games <noreply@mail.accounts.riotgames.com>\nSubject: New login to your account\nDate: Tue, 04 Jun 2024 10:00:00 +0000\n\nx\n\n'
-        b'From 3@x Wed Jan  5 10:00:00 +0000 2022\n'
-        b'From: Jan Kowalski <jan.kowalski@gmail.com>\nSubject: Hej\nDate: Wed, 05 Jan 2022 10:00:00 +0000\n\nx\n\n'
-        b'From 4@x Thu Jan  6 10:00:00 +0000 2022\n'
-        b'From: Me <ada@example.org>\nSubject: Sent by me\nDate: Thu, 06 Jan 2022 10:00:00 +0000\n\nx\n')
-CSV = ('name,url,username,password,note\n'
-       'shinden,https://shinden.pl/,fictional_nick,TOPSECRET1,\n'
-       'google,https://accounts.google.com,ada@example.org,TOPSECRET2,\n'
-       'app,android://hash@com.example.app/,x,TOPSECRET3,\n')
+MBOX = (
+    b'From 1@x Mon Jan  3 10:00:00 +0000 2022\n'
+    b'From: Shinden <noreply@shinden.pl>\nSubject: =?utf-8?q?Witamy!_Potwierd=C5=BA_konto?=\nDate: Mon, 03 Jan 2022 10:00:00 +0000\n\n'
+    b'Body line.\n\nFrom the body without escaping, no year here\n\n'
+    b'From 2@x Tue Jan  4 10:00:00 +0000 2022\n'
+    b'From: Riot Games <noreply@mail.accounts.riotgames.com>\nSubject: New login to your account\nDate: Tue, 04 Jun 2024 10:00:00 +0000\n\nx\n\n'
+    b'From 3@x Wed Jan  5 10:00:00 +0000 2022\n'
+    b'From: Jan Kowalski <jan.kowalski@gmail.com>\nSubject: Hej\nDate: Wed, 05 Jan 2022 10:00:00 +0000\n\nx\n\n'
+    b'From 4@x Thu Jan  6 10:00:00 +0000 2022\n'
+    b'From: Me <ada@example.org>\nSubject: Sent by me\nDate: Thu, 06 Jan 2022 10:00:00 +0000\n\nx\n'
+)
+CSV = (
+    'name,url,username,password,note\n'
+    'shinden,https://shinden.pl/,fictional_nick,TOPSECRET1,\n'
+    'google,https://accounts.google.com,ada@example.org,TOPSECRET2,\n'
+    'app,android://hash@com.example.app/,x,TOPSECRET3,\n'
+)
 
 
 class MailboxAndPasswords(unittest.TestCase):
@@ -33,7 +38,8 @@ class MailboxAndPasswords(unittest.TestCase):
         self.store.add(self.p, 'ada@example.org', 'email', True)
 
     def tearDown(self):
-        self.store.db.close(); self.folder.cleanup()
+        self.store.db.close()
+        self.folder.cleanup()
 
     def test_mbox_headers_only_grouped_by_service_and_people_skipped(self):
         path = Path(self.folder.name) / 'mail.mbox'
@@ -43,11 +49,11 @@ class MailboxAndPasswords(unittest.TestCase):
         self.assertEqual(result['skipped_personal'], 1)
         view = accounthints.view(self.store, self.p)
         domains = {s['domain']: s for s in view['services']}
-        self.assertEqual(set(domains), {'shinden.pl', 'riotgames.com'})   # own and personal mail left out
+        self.assertEqual(set(domains), {'shinden.pl', 'riotgames.com'})  # own and personal mail left out
         self.assertEqual(domains['shinden.pl']['signals'], {'welcome': 1})
         self.assertEqual(domains['riotgames.com']['signals'], {'login': 1})
         stored = json.dumps(self.store.rows('SELECT * FROM account_hints'))
-        self.assertNotIn('Witamy', stored)    # subjects are never stored
+        self.assertNotIn('Witamy', stored)  # subjects are never stored
 
     def test_zip_and_eml_folder(self):
         archive = Path(self.folder.name) / 'takeout.zip'
@@ -56,7 +62,9 @@ class MailboxAndPasswords(unittest.TestCase):
         self.assertEqual(accounthints.import_mailbox(self.store, self.p, str(archive))['domains'], 2)
         emls = Path(self.folder.name) / 'eml'
         emls.mkdir()
-        (emls / 'a.eml').write_bytes(b'From: GitHub <noreply@github.com>\nSubject: Please verify your email\n\nbody')
+        (emls / 'a.eml').write_bytes(
+            b'From: GitHub <noreply@github.com>\nSubject: Please verify your email\n\nbody'
+        )
         self.assertEqual(accounthints.import_mailbox(self.store, self.p, str(emls))['domains'], 1)
 
     def test_password_export_keeps_site_and_login_but_never_the_password(self):
@@ -73,7 +81,12 @@ class MailboxAndPasswords(unittest.TestCase):
         accounthints.import_passwords(self.store, self.p, text=CSV)
         accounthints.decide(self.store, self.p, 'shinden.pl', 'mine')
         accounthints.import_passwords(self.store, self.p, text=CSV)
-        self.assertEqual({s['domain']: s['status'] for s in accounthints.view(self.store, self.p)['services']}['shinden.pl'], 'mine')
+        self.assertEqual(
+            {s['domain']: s['status'] for s in accounthints.view(self.store, self.p)['services']}[
+                'shinden.pl'
+            ],
+            'mine',
+        )
         ids = [s['id'] for s in archivesearch.sites(self.store, self.p)]
         self.assertIn('domain-shinden.pl', ids)
 
@@ -86,9 +99,12 @@ class MailboxAndPasswords(unittest.TestCase):
 class ArchiveSearch(unittest.TestCase):
     def test_numbered_profile_address_is_found_as_unverified_candidate(self):
         from nicktrail.search import discover, results
-        rows = [['original', 'timestamp', 'statuscode'],
-                ['https://shinden.pl/user/123456-fictional/posts', '20230101120000', '200'],
-                ['https://shinden.pl/user/7-fictionalx', '20230101120000', '200']]
+
+        rows = [
+            ['original', 'timestamp', 'statuscode'],
+            ['https://shinden.pl/user/123456-fictional/posts', '20230101120000', '200'],
+            ['https://shinden.pl/user/7-fictionalx', '20230101120000', '200'],
+        ]
         sent = []
 
         class Client:
@@ -97,6 +113,7 @@ class ArchiveSearch(unittest.TestCase):
             def get(self, url, **kwargs):
                 sent.append(url)
                 return {'state': 'found', 'text': json.dumps(rows if 'shinden.pl' in url else [])}
+
         store = Store(':memory:')
         p = store.project('Fixture')
         with patch.dict(archivesearch.SITES, {'shinden': archivesearch.SITES['shinden']}, clear=True):
