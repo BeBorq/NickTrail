@@ -1,4 +1,5 @@
 """rc15: one refusing or misbehaving site must not stop the whole search."""
+
 import os
 import tempfile
 import unittest
@@ -20,7 +21,8 @@ class SearchResilience(unittest.TestCase):
         self.p = self.store.project('Fictional')
 
     def tearDown(self):
-        self.store.db.close(); self.dir.cleanup()
+        self.store.db.close()
+        self.dir.cleanup()
 
     def tasks(self):
         return {(t['platform'], t['mode']): t for t in results(self.store, self.p)[0]['tasks']}
@@ -30,6 +32,7 @@ class SearchResilience(unittest.TestCase):
             if platform == 'GitHub':
                 raise RuntimeError('odd response')
             return {'state': 'not_found', 'detail': 'brak'}
+
         with patch('nicktrail.search.lookup', side_effect=lookup):
             id = discover(self.store, self.p, 'fictional', platforms=['GitHub', 'GitLab'], client=Client())
         status = self.store.rows('SELECT status FROM searches WHERE id=?', (id,))[0]['status']
@@ -44,11 +47,13 @@ class SearchResilience(unittest.TestCase):
 
     def test_rate_limited_task_is_given_up_after_three_rounds(self):
         calls = []
+
         def lookup(platform, term, client):
             calls.append(platform)
             if platform == 'GitHub':
                 return {'state': 'blocked', 'detail': 'HTTP 429; RATE_LIMITED'}
             return {'state': 'not_found', 'detail': 'brak'}
+
         with patch('nicktrail.search.lookup', side_effect=lookup):
             id = discover(self.store, self.p, 'fictional', platforms=['GitHub', 'GitLab'], client=Client())
             self.assertEqual(self.tasks()[('GitHub', 'exact')]['state'], 'pending')
